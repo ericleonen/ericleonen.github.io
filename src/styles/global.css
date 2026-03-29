@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --color-paper: #FAF8F4;
+}
+
+/* Style plain markdown <a> tags to match the Link component */
+.prose a {
+  color: var(--color-blue-500);
+  padding-inline: 0.125rem;
+  margin-inline: -0.125rem;
+  border-radius: 0.125rem;
+  transition: background-color 100ms;
+  text-decoration: none;
+}
+
+.prose a:hover {
+  background-color: var(--color-blue-200);
+}

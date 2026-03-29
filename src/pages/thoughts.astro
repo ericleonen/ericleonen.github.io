@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ThoughtCard from '../components/ThoughtCard.astro';
+import Highlight from '../components/Highlight.astro';
+import { getCollection } from 'astro:content';
+
+const thoughts = (await getCollection('thoughts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout title="Thoughts — Eric Leonen">
+  <h1 class="text-2xl font-bold mb-8">Thoughts</h1>
+
+  {thoughts.length > 0
+    ? (
+      <div class="space-y-8">
+        {thoughts.map(thought => (
+          <ThoughtCard
+            title={thought.data.title}
+            date={thought.data.date}
+            summary={thought.data.summary}
+            href={`/thoughts/${thought.id}`}
+          />
+        ))}
+      </div>
+    )
+    : <p class="text-sm text-gray-400">Nothing here yet.</p>
+  }
+</Layout>

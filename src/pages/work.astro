@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import Highlight from '../components/Highlight.astro';
+import { getCollection, render } from 'astro:content';
+
+const allWork = await getCollection('work');
+
+const byDate = (a: typeof allWork[number], b: typeof allWork[number]) =>
+  b.data.date.valueOf() - a.data.date.valueOf();
+
+const research = await Promise.all(
+  allWork.filter(w => w.data.type === 'research').sort(byDate).map(async item => ({
+    ...item,
+    Content: (await render(item)).Content,
+  }))
+);
+
+const projects = await Promise.all(
+  allWork.filter(w => w.data.type === 'project').sort(byDate).map(async item => ({
+    ...item,
+    Content: (await render(item)).Content,
+  }))
+);
+---
+
+<Layout title="Work — Eric Leonen">
+  <h1 class="text-2xl font-bold mb-8">Work</h1>
+
+  <section class="mb-10">
+    <h2 class="text-lg font-semibold mb-4"><Highlight>Research</Highlight></h2>
+    {research.length > 0
+      ? (
+        <div class="space-y-8">
+          {research.map(item => (
+            <WorkCard
+              title={item.data.title}
+              date={item.data.date}
+              id={item.id}
+              links={item.data.links}
+              Content={item.Content}
+            />
+          ))}
+        </div>
+      )
+      : <p class="text-sm text-gray-400">Nothing here yet.</p>
+    }
+  </section>
+
+  <section>
+    <h2 class="text-lg font-semibold mb-4"><Highlight>Projects</Highlight></h2>
+    {projects.length > 0
+      ? (
+        <div class="space-y-8">
+          {projects.map(item => (
+            <WorkCard
+              title={item.data.title}
+              date={item.data.date}
+              id={item.id}
+              links={item.data.links}
+              Content={item.Content}
+            />
+          ))}
+        </div>
+      )
+      : <p class="text-sm text-gray-400">Nothing here yet.</p>
+    }
+  </section>
+</Layout>

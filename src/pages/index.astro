@@ -1,11 +1,100 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Link from '../components/Link.astro';
+import Highlight from '../components/Highlight.astro';
+import { Icon } from 'astro-icon/components';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const homeRaw = await import('../content/home.md');
+const { frontmatter } = homeRaw;
+const Content = homeRaw.default;
+
+// Parse [text](url) markdown links within a string into segments
+function parseLinks(text: string): Array<{ text: string; url?: string }> {
+  const parts: Array<{ text: string; url?: string }> = [];
+  const re = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let last = 0, match;
+  while ((match = re.exec(text)) !== null) {
+    if (match.index > last) parts.push({ text: text.slice(last, match.index) });
+    parts.push({ text: match[1], url: match[2] });
+    last = match.index + match[0].length;
+  }
+  if (last < text.length) parts.push({ text: text.slice(last) });
+
+  return parts;
+}
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={frontmatter.name}>
+
+  <!-- Profile -->
+  <section class="flex flex-col sm:flex-row sm:items-center gap-5 mb-12">
+    <img
+      src="/profile.jpg"
+      alt={frontmatter.name}
+      class="w-32 h-32 sm:w-20 sm:h-20 shrink-0 rounded-full object-cover bg-gray-200 border-orange-200 border-4"
+    />
+    <div>
+      <h1 class="text-2xl font-semibold mb-3"><Highlight>{frontmatter.name}</Highlight></h1>
+
+      <!-- GitHub + LinkedIn -->
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm mb-1.5">
+        <Link href={frontmatter.github} external>
+          <span class="inline-flex items-center gap-1.5">
+            <Icon name="simple-icons:github" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            GitHub
+          </span>
+        </Link>
+        <Link href={frontmatter.linkedin} external>
+          <span class="inline-flex items-center gap-1.5">
+            <Icon name="simple-icons:linkedin" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            LinkedIn
+          </span>
+        </Link>
+      </div>
+
+      <!-- Emails -->
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-gray-500">
+        {frontmatter.emails.map((email: string) => {
+          const isUW = email.includes('uw.edu');
+          return (
+            <span class="inline-flex items-center gap-1.5">
+              {isUW
+                ? <Icon name="lucide:landmark" class="w-3.5 h-3.5 shrink-0" aria-label="UW" />
+                : <Icon name="lucide:mail" class="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+              }
+              {email}
+            </span>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="mb-10">
+    <h2 class="font-semibold mb-3"><Highlight>about me</Highlight></h2>
+    <div class="text-gray-800 leading-relaxed prose prose-gray max-w-none">
+      <Content />
+    </div>
+  </section>
+
+  <!-- Working On -->
+  <section>
+    <h2 class="font-semibold mb-3"><Highlight>works in progress</Highlight></h2>
+    <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5">
+      {frontmatter.workingOn.map((item: string) => (
+        <Fragment>
+          <span class="text-gray-400 select-none">{">"}</span>
+          <span class="text-gray-800">
+            {parseLinks(item).map(seg =>
+              seg.url
+                ? <Link href={seg.url}>{seg.text}</Link>
+                : seg.text
+            )}
+          </span>
+        </Fragment>
+      ))}
+    </div>
+  </section>
+
 </Layout>

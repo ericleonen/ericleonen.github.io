@@ -1,0 +1,42 @@
+---
+import Link from './Link.astro';
+import type { render } from 'astro:content';
+
+type ContentComponent = Awaited<ReturnType<typeof render>>['Content'];
+
+interface Props {
+  title: string;
+  date: Date;
+  id: string;
+  links?: { label: string; url: string }[];
+  Content: ContentComponent;
+}
+
+const { title, date, id, links, Content } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+});
+
+---
+
+<div class="flex gap-4">
+  <picture class="w-20 min-h-20 shrink-0 rounded overflow-hidden bg-gray-200 block border-2 border-orange-200 self-start">
+    <source srcset={`/${id}.png`} type="image/png" />
+    <source srcset={`/${id}.jpg`} type="image/jpeg" />
+    <img src={`/${id}.png`} alt={title} class="w-full h-full object-cover" />
+  </picture>
+  <div class="min-w-0">
+    <h3 class="font-medium">{title}</h3>
+    <div class="flex flex-wrap items-baseline gap-x-3 text-sm mt-1">
+      <span class="text-xs text-gray-400 shrink-0">{formattedDate}</span>
+      {links && links.map(link => (
+        <Link href={link.url} external>{link.label}</Link>
+      ))}
+    </div>
+    <div class="text-sm text-gray-700 mt-3 prose prose-sm prose-gray max-w-none">
+      <Content />
+    </div>
+  </div>
+</div>

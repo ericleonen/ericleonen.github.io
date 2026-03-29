@@ -1,0 +1,22 @@
+---
+interface Props {
+  href: string;
+  color?: 'yellow' | 'orange' | 'blue';
+  external?: boolean;
+  class?: string;
+}
+
+const { href, color = 'blue', external = false, class: className } = Astro.props;
+
+const colorMap = {
+  yellow: 'hover:bg-yellow-200',
+  orange: 'hover:bg-orange-200',
+  blue:   'text-blue-500 hover:bg-blue-200',
+};
+---
+
+<a
+  href={href}
+  class:list={['transition-colors duration-100 px-1 -mx-1 rounded-sm font-medium', colorMap[color], className]}
+  {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+><slot /></a>

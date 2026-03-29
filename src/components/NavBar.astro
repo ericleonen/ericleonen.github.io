@@ -1,0 +1,30 @@
+---
+import Link from './Link.astro';
+
+const links = [
+  { href: '/',         label: 'Home' },
+  { href: '/work',     label: 'Work' },
+  { href: '/thoughts', label: 'Thoughts' },
+];
+
+const current = Astro.url.pathname;
+
+function isActive(href: string) {
+  if (href === '/') return current === '/';
+  return current === href || current.startsWith(href + '/');
+}
+---
+
+<nav class="py-6">
+  <ul class="flex justify-center gap-8">
+    {links.map(link => (
+      <li>
+        <Link
+          href={link.href}
+          color="orange"
+          class={isActive(link.href) ? 'font-medium underline' : 'font-medium'}
+        >{link.label}</Link>
+      </li>
+    ))}
+  </ul>
+</nav>

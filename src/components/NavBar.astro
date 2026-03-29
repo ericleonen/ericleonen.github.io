@@ -15,7 +15,7 @@ function isActive(href: string) {
 }
 ---
 
-<nav class="py-6">
+<nav id="navbar" class="sticky top-0 z-50 bg-paper py-6 border-b border-transparent transition-colors duration-200">
   <ul class="flex justify-center gap-8">
     {links.map(link => (
       <li>
@@ -28,3 +28,14 @@ function isActive(href: string) {
     ))}
   </ul>
 </nav>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 0) {
+      navbar?.classList.replace('border-transparent', 'border-gray-200');
+    } else {
+      navbar?.classList.replace('border-gray-200', 'border-transparent');
+    }
+  });
+</script>

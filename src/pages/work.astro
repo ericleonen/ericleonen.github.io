@@ -3,8 +3,24 @@ import Layout from '../layouts/Layout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import Highlight from '../components/Highlight.astro';
 import { getCollection, render } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const allWork = await getCollection('work');
+
+const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif']);
+
+function getWorkImages(id: string): { src: string; alt: string }[] {
+  const dir = path.join(process.cwd(), 'public', id);
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir)
+    .filter(f => IMAGE_EXTS.has(path.extname(f).toLowerCase()))
+    .sort()
+    .map(f => ({
+      src: `/${id}/${f}`,
+      alt: path.basename(f, path.extname(f)),
+    }));
+}
 
 const byDate = (a: typeof allWork[number], b: typeof allWork[number]) =>
   b.data.date.valueOf() - a.data.date.valueOf();
@@ -12,6 +28,7 @@ const byDate = (a: typeof allWork[number], b: typeof allWork[number]) =>
 const research = await Promise.all(
   allWork.filter(w => w.data.type === 'research').sort(byDate).map(async item => ({
     ...item,
+    images: getWorkImages(item.id),
     Content: (await render(item)).Content,
   }))
 );
@@ -19,6 +36,7 @@ const research = await Promise.all(
 const projects = await Promise.all(
   allWork.filter(w => w.data.type === 'project').sort(byDate).map(async item => ({
     ...item,
+    images: getWorkImages(item.id),
     Content: (await render(item)).Content,
   }))
 );
@@ -31,15 +49,18 @@ const projects = await Promise.all(
     <h2 class="text-lg font-semibold mb-4"><Highlight>research</Highlight></h2>
     {research.length > 0
       ? (
-        <div class="space-y-8">
+        <div class="divide-y divide-gray-200">
           {research.map(item => (
-            <WorkCard
-              title={item.data.title}
-              date={item.data.date}
-              id={item.id}
-              links={item.data.links}
-              Content={item.Content}
-            />
+            <div class="py-8 first:pt-0 last:pb-0">
+              <WorkCard
+                title={item.data.title}
+                date={item.data.date}
+                id={item.id}
+                images={item.images}
+                links={item.data.links}
+                Content={item.Content}
+              />
+            </div>
           ))}
         </div>
       )
@@ -51,15 +72,18 @@ const projects = await Promise.all(
     <h2 class="text-lg font-semibold mb-4"><Highlight>projects</Highlight></h2>
     {projects.length > 0
       ? (
-        <div class="space-y-8">
+        <div class="divide-y divide-gray-200">
           {projects.map(item => (
-            <WorkCard
-              title={item.data.title}
-              date={item.data.date}
-              id={item.id}
-              links={item.data.links}
-              Content={item.Content}
-            />
+            <div class="py-8 first:pt-0 last:pb-0">
+              <WorkCard
+                title={item.data.title}
+                date={item.data.date}
+                id={item.id}
+                images={item.images}
+                links={item.data.links}
+                Content={item.Content}
+              />
+            </div>
           ))}
         </div>
       )

@@ -11,8 +11,8 @@
 /* Style plain markdown <a> tags to match the Link component */
 .prose a {
   color: var(--color-blue-500);
-  padding-inline: 2px;
-  margin-inline: -2px;
+  padding-inline: 4px;
+  margin-inline: -4px;
   border-radius: 4px;
   transition: background-color 100ms;
   text-decoration: none;

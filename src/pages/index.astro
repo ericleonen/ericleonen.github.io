@@ -81,20 +81,38 @@ function parseLinks(text: string): Array<{ text: string; url?: string }> {
   <!-- Working On -->
   <section>
     <h2 class="font-semibold mb-3"><Highlight>works in progress</Highlight></h2>
-    <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5">
-      {frontmatter.workingOn.map((item: string) => (
+    <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2">
+      {frontmatter.workingOn.map((item: { text: string; date?: string }) => (
         <Fragment>
           <span class="text-gray-400 select-none">{">"}</span>
           <span class="text-gray-800">
-            {parseLinks(item).map(seg =>
+            {parseLinks(item.text).map(seg =>
               seg.url
                 ? <Link href={seg.url}>{seg.text}</Link>
                 : seg.text
+            )}
+            {item.date && (
+              <span
+                data-countdown={item.date}
+                class="font-medium"
+              ></span>
             )}
           </span>
         </Fragment>
       ))}
     </div>
+
+    <script>
+      document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {
+        const date = el.dataset.countdown;
+        if (!date) return;
+        const diff = new Date(date).setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0);
+        if (diff < 0) return;
+        const days = Math.round(diff / 86400000);
+        el.textContent = days === 0 ? '(today!!!)' : days === 1 ? '(tomorrow!)' : `(${days} days left)`;
+        el.className += days > 14 ? ' text-green-600' : days > 7 ? ' text-orange-600' : ' text-red-600';
+      });
+    </script>
   </section>
 
 </Layout>

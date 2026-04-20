@@ -7,7 +7,7 @@ interface Props {
   description?: string;
 }
 
-const { title = 'Eric Leonen', description = 'Personal site of Eric Leonen — data scientist, statistician, and researcher at the University of Washington.' } = Astro.props;
+const { title = 'Eric Leonen', description = 'Personal site of Eric Leonen' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const lastUpdated = new Date().toLocaleDateString('en-US', {

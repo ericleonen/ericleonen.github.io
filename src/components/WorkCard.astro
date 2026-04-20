@@ -30,6 +30,8 @@ const formattedDate = date.toLocaleDateString('en-US', {
           <img
             src={img.src}
             alt={img.alt}
+            loading="lazy"
+            decoding="async"
             class="h-full w-auto object-cover"
           />
           <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-black/60 px-2 py-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100">

@@ -6,7 +6,7 @@ emails:
   - "ericleonen [at] gmail.com"
   - "eol05 [at] uw.edu"
 workingOn:
-  - text: "Improving [TheoremSearch](https://github.com/uw-math-ai/TheoremSearch) by making the world's largest graph of mathematical statements; for EMNLP 2026"
+  - text: "Improving [TheoremSearch](https://github.com/uw-math-ai/TheoremSearch) by making the world's largest graph of mathematical statements; targeting [EMNLP 2026](https://2026.emnlp.org/)"
     date: "2026-05-25"
   - text: "Writing [Who Hears the Fed?](https://github.com/ericleonen/who-hears-the-fed), a study of the effect of monetary policy on household inflation expectations"
     date: "2026-05-15"

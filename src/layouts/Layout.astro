@@ -4,9 +4,11 @@ import '../styles/global.css';
 
 interface Props {
   title?: string;
+  description?: string;
 }
 
-const { title = 'Eric Leonen' } = Astro.props;
+const { title = 'Eric Leonen', description = 'Personal site of Eric Leonen — data scientist, statistician, and researcher at the University of Washington.' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const lastUpdated = new Date().toLocaleDateString('en-US', {
   year: 'numeric',
@@ -22,8 +24,16 @@ const lastUpdated = new Date().toLocaleDateString('en-US', {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.png" />
+    <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Eric Leonen" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
   </head>
   <body class="bg-paper text-black font-mono antialiased text-base leading-relaxed">
     <NavBar />

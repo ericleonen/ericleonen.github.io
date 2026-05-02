@@ -15,5 +15,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  site: "https://ericleonen.github.io"
+  site: "https://ericleonen.github.io/"
 });

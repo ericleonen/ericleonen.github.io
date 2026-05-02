@@ -2,17 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import Highlight from '../components/Highlight.astro';
 import Link from '../components/Link.astro';
+import { Icon } from 'astro-icon/components';
 import cv from '../content/cv.json';
 
-const TEX_URL = 'https://ericleonen.github.io/ericleonen-cv.tex';
-const pdfUrl = `https://latex.ytotech.com/builds/sync?url=${encodeURIComponent(TEX_URL)}&compiler=pdflatex`;
+function dash(str: string) {
+  return str.replace(/--/g, '–');
+}
 ---
 
 <Layout title="CV — Eric Leonen">
-  <div class="flex justify-between items-baseline mb-8">
+  <div class="flex justify-between items-center mb-8">
     <h1 class="text-2xl font-bold">CV</h1>
-    <Link href={pdfUrl} color="orange" class="text-sm font-medium" target="_blank" rel="noopener">
-      Download PDF →
+    <Link href="/ericleonen-cv.pdf" class="flex items-center gap-1.5 text-sm" external={true}>
+      <Icon name="lucide:file-text" class="w-4 h-4 shrink-0" />
+      View PDF
     </Link>
   </div>
 
@@ -44,10 +47,10 @@ const pdfUrl = `https://latex.ytotech.com/builds/sync?url=${encodeURIComponent(T
           <p class="font-medium">{r.title}</p>
           <div class="flex justify-between items-baseline">
             <span class="text-sm text-gray-500 italic">{r.organization}, {r.location}</span>
-            <span class="text-sm text-gray-500 ml-4 shrink-0">{r.dates}</span>
+            <span class="text-sm text-gray-500 ml-4 shrink-0">{dash(r.dates)}</span>
           </div>
           <ul class="mt-1 list-disc list-inside text-sm space-y-0.5">
-            {r.bullets.map(b => <li>{b}</li>)}
+            {r.bullets.map(b => <li>{dash(b)}</li>)}
           </ul>
         </div>
       ))}
@@ -61,9 +64,9 @@ const pdfUrl = `https://latex.ytotech.com/builds/sync?url=${encodeURIComponent(T
         <div>
           <div class="flex justify-between items-baseline">
             <span class="font-medium">{p.title}</span>
-            <span class="text-sm text-gray-500 ml-4 shrink-0">{p.dates}</span>
+            <span class="text-sm text-gray-500 ml-4 shrink-0">{dash(p.dates)}</span>
           </div>
-          <p class="text-sm">{p.description}</p>
+          <p class="text-sm">{dash(p.description)}</p>
         </div>
       ))}
     </div>

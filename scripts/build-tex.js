@@ -23,7 +23,7 @@ const tex = `\\documentclass[11pt,letterpaper]{article}
 \\usepackage[top=0.75in,bottom=0.75in,left=1in,right=1in]{geometry}
 \\usepackage[T1]{fontenc}
 \\usepackage{lmodern}
-\\usepackage[hidelinks]{hyperref}
+\\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
 \\usepackage{enumitem}
 \\usepackage{titlesec}
 
@@ -81,3 +81,18 @@ ${Object.entries(cv.skills).map(([cat, items]) => `\\textbf{${esc(cat)}:} ${item
 
 writeFileSync(join(__dirname, '../public/ericleonen-cv.tex'), tex);
 console.log('Generated public/ericleonen-cv.tex');
+
+console.log('Compiling PDF...');
+const res = await fetch('https://latex.ytotech.com/builds/sync', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ compiler: 'pdflatex', resources: [{ main: true, content: tex }] }),
+});
+
+if (!res.ok) {
+  console.error('PDF compilation failed:\n', await res.text());
+  process.exit(1);
+}
+
+writeFileSync(join(__dirname, '../public/ericleonen-cv.pdf'), Buffer.from(await res.arrayBuffer()));
+console.log('Generated public/ericleonen-cv.pdf');

@@ -1,25 +1,33 @@
 {
   "name": "Eric Leonen",
   "contact": {
+    "location": "Seattle, WA",
+    "phone": "(425) 345-1374",
     "email": "ericleonen@gmail.com",
-    "site": "ericleonen.com",
+    "site": "ericleonen.github.io",
     "github": "github.com/ericleonen",
     "linkedin": "linkedin.com/in/eric-leonen-208a05313"
   },
+  "interests": [
+    "Causal Inference & Econometrics",
+    "Macroeconomics & Monetary Policy",
+    "LLM Reasoning",
+    "Economics of AI"
+  ],
   "education": [
     {
       "institution": "University of Washington",
       "location": "Seattle, WA",
       "degree": "B.S. Applied and Computational Mathematical Sciences (Data Science and Statistics)",
-      "graduated": "Expected June 2027",
+      "graduated": "Sep. 2023 -- Exp. June 2027",
       "gpa": "3.99",
       "coursework": [
         "Causal Inference",
         "Machine Learning",
-        "Database Systems", 
-        "Nonlinear Optimization", 
+        "Database Systems",
+        "Nonlinear Optimization",
         "Nonparametric Statistics",
-        "Continuous Modeling", 
+        "Continuous Modeling",
         "Macroeconomics",
         "Financial Economics"
       ]
@@ -31,7 +39,7 @@
       "link": "https://arxiv.org/abs/2602.05216",
       "organization": "UW Math AI Lab",
       "location": "Seattle, WA",
-      "dates": "September 2025 -- Present",
+      "dates": "Sep. 2025 -- Present",
       "bullets": [
         "Built a semantic search engine over 9.2 million mathematical theorems using a vector embedding pipeline and AWS infrastructure",
         "Accepted to the 2026 ICLR Workshop on LLM Reasoning"
@@ -42,7 +50,7 @@
       "link": "https://drive.google.com/file/d/1X0vYUTDUBq5AYZpU16YYuxfxwuCONm03/view?usp=sharing",
       "organization": "University of Washington",
       "location": "Seattle, WA",
-      "dates": "August 2025",
+      "dates": "Aug. 2025",
       "bullets": [
         "Examined how Okun's Law changed in the U.S. across recession periods and states using 2005--2025 data with R",
         "Found no evidence of coefficient heterogeneity across recession periods, and only weak evidence across states"
@@ -53,10 +61,20 @@
       "link": "https://drive.google.com/file/d/1itcwBkFwv2c7meYlo3Za_PcSLW6c7ojG/view?usp=sharing",
       "organization": "University of Washington",
       "location": "Seattle, WA",
-      "dates": "December 2025",
+      "dates": "Dec. 2025",
       "bullets": [
         "Analyzed how well the Mankiw-Romer-Weil Solow growth model captures economic dynamics of the U.S., Japan, and Germany from 1950--2023 with Python",
         "Found that a SINDy-driven model outperformed those with constant or time-varying exogenous parameters"
+      ]
+    },
+    {
+      "title": "Statistics Directed Reading Program",
+      "organization": "Department of Statistics, University of Washington",
+      "location": "Seattle, WA",
+      "dates": "Sep. -- Dec. 2025",
+      "bullets": [
+        "Studied econometric causal estimators under faculty mentorship, with emphasis on identification strategies and their theoretical foundations",
+        "Delivered a 15-minute presentation on the instrumental variables estimator applied to a job training program efficacy study"
       ]
     }
   ],
@@ -64,18 +82,27 @@
     {
       "title": "Dean's List",
       "organization": "University of Washington",
-      "dates": "2024 -- Present",
+      "dates": "Sep. 2023 -- Present",
       "note": "Every quarter"
     },
     {
       "title": "Abraham Goo Endowed Scholarship",
       "organization": "ACMS, University of Washington",
-      "dates": "2025",
+      "dates": "Oct. 2025",
       "note": "Inaugural recipient"
+    }
+  ],
+  "teaching": [
+    {
+      "title": "Lead Mathematics Tutor",
+      "organization": "UW Math Study Center",
+      "location": "Seattle, WA",
+      "dates": "May 2024 -- Present",
+      "courses": "Precalculus, Calculus I--III"
     }
   ],
   "skills": {
     "Programming": ["Python", "R", "SQL", "MATLAB", "Java", "TypeScript"],
-    "Tools": ["AWS", "Docker", "Tableau", "Linux", "GitHub"]
+    "Tools": ["AWS", "Docker", "Tableau", "Linux", "Excel", "GitHub"]
   }
 }

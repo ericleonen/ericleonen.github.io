@@ -39,18 +39,24 @@ const tex = `\\documentclass[11pt,letterpaper]{article}
 \\begin{document}
 
 \\begin{center}
-  {\\LARGE\\bfseries ${esc(cv.name)}} \\\\[6pt]
+  \\href{https://${cv.contact.site}}{{\\LARGE\\bfseries ${esc(cv.name)}}} \\\\[6pt]
   \\small
-  \\href{mailto:${cv.contact.email}}{${esc(cv.contact.email)}}
+  ${esc(cv.contact.location)}
   ~$\\cdot$~
-  \\href{https://${cv.contact.site}}{${esc(cv.contact.site)}}
+  ${esc(cv.contact.phone)}
+  ~$\\cdot$~
+  \\href{mailto:${cv.contact.email}}{${esc(cv.contact.email)}}
   ~$\\cdot$~
   \\href{https://${cv.contact.github}}{${esc(cv.contact.github)}}
   ~$\\cdot$~
-  \\href{https://${cv.contact.linkedin}}{${esc(cv.contact.linkedin)}}
+  \\href{https://${cv.contact.linkedin}}{LinkedIn}
 \\end{center}
 
 \\vspace{4pt}
+
+\\section{Research Interests}
+
+${cv.interests.join(', ')}
 
 \\section{Education}
 
@@ -65,16 +71,22 @@ ${cv.research.map(r => `${r.link ? `\\href{${r.link}}{\\textbf{${esc(r.title)}}}
 \\textit{${esc(r.organization)}}, ${esc(r.location)} \\hfill ${esc(r.dates)}
 \\begin{itemize}
 ${r.bullets.map(b => `  \\item ${esc(b)}`).join('\n')}
-\\end{itemize}`).join('\n\\vspace{4pt}\n')}
+\\end{itemize}`).join('\n\\vspace{6pt}\n')}
 
 \\section{Honors \\& Awards}
 
 ${cv.awards.map(a => `\\textbf{${esc(a.title)}} \\hfill ${esc(a.dates)} \\\\
-\\textit{${esc(a.organization)}} \\hfill ${esc(a.note)}`).join('\n\n')}
+\\textit{${esc(a.organization)}} \\hfill ${esc(a.note)}`).join(' \\\\[6pt]\n')}
+
+\\section{Teaching Experience}
+
+${cv.teaching.map(t => `\\textbf{${esc(t.title)}} \\hfill ${esc(t.dates)} \\\\
+\\textit{${esc(t.organization)}}, ${esc(t.location)} \\\\
+${esc(t.courses)}`).join(' \\\\[6pt]\n')}
 
 \\section{Skills}
 
-${Object.entries(cv.skills).map(([cat, items]) => `\\textbf{${esc(cat)}:} ${items.map(esc).join(', ')}`).join(' \\\\[2pt]\n')}
+${Object.entries(cv.skills).map(([cat, items]) => `\\textbf{${esc(cat)}:} ${items.map(esc).join(', ')}`).join(' \\\\[4pt]\n')}
 
 \\end{document}
 `;

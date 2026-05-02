@@ -11,13 +11,25 @@ function dash(str: string) {
 ---
 
 <Layout title="CV — Eric Leonen">
-  <div class="flex justify-between items-center mb-8">
-    <h1 class="text-2xl font-bold">CV</h1>
-    <Link href="/ericleonen-cv.pdf" class="flex items-center gap-1.5 text-sm" external={true}>
+  <div class="flex justify-between items-start mb-8">
+    <div>
+      <h1 class="text-2xl font-bold mb-1">CV</h1>
+      <p class="text-sm text-gray-500">
+        {cv.contact.location} · {cv.contact.phone} · {cv.contact.email} ·
+        <a href={`https://${cv.contact.github}`} target="_blank" rel="noopener" class="hover:underline">{cv.contact.github}</a> ·
+        <a href={`https://${cv.contact.linkedin}`} target="_blank" rel="noopener" class="hover:underline">LinkedIn</a>
+      </p>
+    </div>
+    <Link href="/ericleonen-cv.pdf" class="flex items-center gap-1.5 text-sm shrink-0 ml-6" external={true}>
       <Icon name="lucide:file-text" class="w-4 h-4 shrink-0" />
       View PDF
     </Link>
   </div>
+
+  <section class="mb-10">
+    <h2 class="text-lg font-semibold mb-4"><Highlight>research interests</Highlight></h2>
+    <p class="text-sm">{cv.interests.join(', ')}</p>
+  </section>
 
   <section class="mb-10">
     <h2 class="text-lg font-semibold mb-4"><Highlight>education</Highlight></h2>
@@ -73,6 +85,22 @@ function dash(str: string) {
             <span class="text-sm text-gray-500 italic">{a.organization}</span>
             <span class="text-sm text-gray-500 ml-4 shrink-0">{a.note}</span>
           </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-lg font-semibold mb-4"><Highlight>teaching experience</Highlight></h2>
+    <div class="space-y-4">
+      {cv.teaching.map(t => (
+        <div>
+          <div class="flex justify-between items-baseline">
+            <span class="font-medium">{t.title}</span>
+            <span class="text-sm text-gray-500 ml-4 shrink-0">{dash(t.dates)}</span>
+          </div>
+          <span class="text-sm text-gray-500 italic">{t.organization}, {t.location}</span>
+          <p class="text-sm">{dash(t.courses)}</p>
         </div>
       ))}
     </div>

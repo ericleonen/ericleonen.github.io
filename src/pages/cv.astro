@@ -65,7 +65,7 @@ function dash(str: string) {
             <span class="text-sm text-gray-500 italic">{r.organization}, {r.location}</span>
             <span class="text-sm text-gray-500 ml-4 shrink-0">{dash(r.dates)}</span>
           </div>
-          <ul class="mt-1 list-disc list-inside text-sm space-y-0.5">
+          <ul class="mt-1 list-disc list-outside pl-5 text-sm space-y-0.5">
             {r.bullets.map(b => <li>{dash(b)}</li>)}
           </ul>
         </div>

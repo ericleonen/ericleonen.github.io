@@ -8,4 +8,4 @@ links:
   - { label: "code", url: "https://github.com/uw-math-ai/TheoremSearch" }
 ---
 
-Built a semantic search engine for mathematical theorems as part of the University of Washington's [Math AI Lab](https://sites.math.washington.edu/ai/). Led development of the world's largest theorem database (9.2 million) using AWS services and a Python pipeline. Accepted to the 2026 ICLR Workshop in LLM Reasoning and submitted to the 2026 ICML.
+Built a semantic search engine for mathematical theorems as part of the University of Washington's [Math AI Lab](https://sites.math.washington.edu/ai/). Led development of the world's largest theorem database (9.2 million) using AWS services and a Python pipeline. Accepted to the 2026 ICLR Workshop in LLM Reasoning.

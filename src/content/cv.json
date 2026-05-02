@@ -1,0 +1,67 @@
+{
+  "name": "Eric Leonen",
+  "contact": {
+    "email": "ericleonen@gmail.com",
+    "site": "ericleonen.com",
+    "github": "github.com/ericleonen",
+    "linkedin": "linkedin.com/in/eric-leonen-208a05313"
+  },
+  "education": [
+    {
+      "institution": "University of Washington",
+      "location": "Seattle, WA",
+      "degree": "B.S. Data Science and Statistics",
+      "graduated": "Expected June 2027",
+      "gpa": "3.99",
+      "coursework": ["Causal Inference", "Nonlinear Optimization", "Nonparametric Statistics", "Macroeconomics"]
+    }
+  ],
+  "research": [
+    {
+      "title": "Semantic Search over 9 Million Mathematical Theorems",
+      "organization": "UW Math AI Lab",
+      "location": "Seattle, WA",
+      "dates": "2025 -- Present",
+      "bullets": [
+        "Built a semantic search engine over 9.2 million mathematical theorems using a vector embedding pipeline and AWS infrastructure",
+        "Accepted to the 2026 ICLR Workshop on LLM Reasoning; targeting EMNLP 2026"
+      ]
+    },
+    {
+      "title": "The Stability of Okun's Law Across Time and Space",
+      "organization": "University of Washington",
+      "location": "Seattle, WA",
+      "dates": "August 2025",
+      "bullets": [
+        "Examined how Okun's Law changed in the U.S. across recession periods and states using 2005--2025 data with R",
+        "Found no evidence of coefficient heterogeneity across recession periods, and only weak evidence across states"
+      ]
+    },
+    {
+      "title": "So Long Solow? An Empirical Study of the Efficacy of Solow Growth Models",
+      "organization": "University of Washington",
+      "location": "Seattle, WA",
+      "dates": "December 2025",
+      "bullets": [
+        "Analyzed how well the Mankiw-Romer-Weil Solow growth model captures economic dynamics of the U.S., Japan, and Germany from 1950--2023 with Python",
+        "Found that a SINDy-driven model outperformed those with constant or time-varying exogenous parameters"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "HuskyCalcArchive",
+      "dates": "January 2026",
+      "description": "An exam question database for UW's MATH 124/5/6 calculus series; includes a pipeline to capture and label 1,700+ questions from archived PDFs"
+    },
+    {
+      "title": "Deriva-Wiz",
+      "dates": "December 2024",
+      "description": "A derivative practice game built on a symbolic differentiator written from scratch in TypeScript"
+    }
+  ],
+  "skills": {
+    "Languages": ["Python", "R", "TypeScript"],
+    "Tools": ["AWS"]
+  }
+}

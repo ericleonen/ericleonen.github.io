@@ -12,13 +12,4 @@ const work = defineCollection({
   }),
 });
 
-const thoughts = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/thoughts' }),
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    summary: z.string().optional(),
-  }),
-});
-
-export const collections = { work, thoughts };
+export const collections = { work };

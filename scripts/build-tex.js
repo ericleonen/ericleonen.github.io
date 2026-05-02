@@ -61,16 +61,16 @@ GPA: ${esc(edu.gpa)}/4.0 \\\\[2pt]
 
 \\section{Research Experience}
 
-${cv.research.map(r => `\\textbf{${esc(r.title)}} \\\\
+${cv.research.map(r => `${r.link ? `\\href{${r.link}}{\\textbf{${esc(r.title)}}}` : `\\textbf{${esc(r.title)}}`} \\\\
 \\textit{${esc(r.organization)}}, ${esc(r.location)} \\hfill ${esc(r.dates)}
 \\begin{itemize}
 ${r.bullets.map(b => `  \\item ${esc(b)}`).join('\n')}
 \\end{itemize}`).join('\n\\vspace{4pt}\n')}
 
-\\section{Projects}
+\\section{Honors \\& Awards}
 
-${cv.projects.map(p => `\\textbf{${esc(p.title)}} \\hfill ${esc(p.dates)} \\\\
-${esc(p.description)}`).join('\n\n\\vspace{4pt}\n\n')}
+${cv.awards.map(a => `\\textbf{${esc(a.title)}} \\hfill ${esc(a.dates)} \\\\
+\\textit{${esc(a.organization)}} \\hfill ${esc(a.note)}`).join('\n\n')}
 
 \\section{Skills}
 

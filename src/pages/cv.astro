@@ -44,7 +44,10 @@ function dash(str: string) {
     <div class="space-y-6">
       {cv.research.map(r => (
         <div>
-          <p class="font-medium">{r.title}</p>
+          {r.link
+            ? <a href={r.link} target="_blank" rel="noopener" class="font-medium hover:underline">{r.title}</a>
+            : <p class="font-medium">{r.title}</p>
+          }
           <div class="flex justify-between items-baseline">
             <span class="text-sm text-gray-500 italic">{r.organization}, {r.location}</span>
             <span class="text-sm text-gray-500 ml-4 shrink-0">{dash(r.dates)}</span>
@@ -58,15 +61,18 @@ function dash(str: string) {
   </section>
 
   <section class="mb-10">
-    <h2 class="text-lg font-semibold mb-4"><Highlight>projects</Highlight></h2>
+    <h2 class="text-lg font-semibold mb-4"><Highlight>honors & awards</Highlight></h2>
     <div class="space-y-4">
-      {cv.projects.map(p => (
+      {cv.awards.map(a => (
         <div>
           <div class="flex justify-between items-baseline">
-            <span class="font-medium">{p.title}</span>
-            <span class="text-sm text-gray-500 ml-4 shrink-0">{dash(p.dates)}</span>
+            <span class="font-medium">{a.title}</span>
+            <span class="text-sm text-gray-500 ml-4 shrink-0">{dash(a.dates)}</span>
           </div>
-          <p class="text-sm">{dash(p.description)}</p>
+          <div class="flex justify-between items-baseline">
+            <span class="text-sm text-gray-500 italic">{a.organization}</span>
+            <span class="text-sm text-gray-500 ml-4 shrink-0">{a.note}</span>
+          </div>
         </div>
       ))}
     </div>

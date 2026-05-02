@@ -10,25 +10,36 @@
     {
       "institution": "University of Washington",
       "location": "Seattle, WA",
-      "degree": "B.S. Data Science and Statistics",
+      "degree": "B.S. Applied and Computational Mathematical Sciences (Data Science and Statistics)",
       "graduated": "Expected June 2027",
       "gpa": "3.99",
-      "coursework": ["Causal Inference", "Nonlinear Optimization", "Nonparametric Statistics", "Macroeconomics"]
+      "coursework": [
+        "Causal Inference",
+        "Machine Learning",
+        "Database Systems", 
+        "Nonlinear Optimization", 
+        "Nonparametric Statistics",
+        "Continuous Modeling", 
+        "Macroeconomics",
+        "Financial Economics"
+      ]
     }
   ],
   "research": [
     {
       "title": "Semantic Search over 9 Million Mathematical Theorems",
+      "link": "https://arxiv.org/abs/2602.05216",
       "organization": "UW Math AI Lab",
       "location": "Seattle, WA",
-      "dates": "2025 -- Present",
+      "dates": "September 2025 -- Present",
       "bullets": [
         "Built a semantic search engine over 9.2 million mathematical theorems using a vector embedding pipeline and AWS infrastructure",
-        "Accepted to the 2026 ICLR Workshop on LLM Reasoning; targeting EMNLP 2026"
+        "Accepted to the 2026 ICLR Workshop on LLM Reasoning"
       ]
     },
     {
       "title": "The Stability of Okun's Law Across Time and Space",
+      "link": "https://drive.google.com/file/d/1X0vYUTDUBq5AYZpU16YYuxfxwuCONm03/view?usp=sharing",
       "organization": "University of Washington",
       "location": "Seattle, WA",
       "dates": "August 2025",
@@ -39,6 +50,7 @@
     },
     {
       "title": "So Long Solow? An Empirical Study of the Efficacy of Solow Growth Models",
+      "link": "https://drive.google.com/file/d/1itcwBkFwv2c7meYlo3Za_PcSLW6c7ojG/view?usp=sharing",
       "organization": "University of Washington",
       "location": "Seattle, WA",
       "dates": "December 2025",
@@ -48,20 +60,22 @@
       ]
     }
   ],
-  "projects": [
+  "awards": [
     {
-      "title": "HuskyCalcArchive",
-      "dates": "January 2026",
-      "description": "An exam question database for UW's MATH 124/5/6 calculus series; includes a pipeline to capture and label 1,700+ questions from archived PDFs"
+      "title": "Dean's List",
+      "organization": "University of Washington",
+      "dates": "2024 -- Present",
+      "note": "Every quarter"
     },
     {
-      "title": "Deriva-Wiz",
-      "dates": "December 2024",
-      "description": "A derivative practice game built on a symbolic differentiator written from scratch in TypeScript"
+      "title": "Abraham Goo Endowed Scholarship",
+      "organization": "ACMS, University of Washington",
+      "dates": "2025",
+      "note": "Inaugural recipient"
     }
   ],
   "skills": {
-    "Languages": ["Python", "R", "TypeScript"],
-    "Tools": ["AWS"]
+    "Programming": ["Python", "R", "SQL", "MATLAB", "Java", "TypeScript"],
+    "Tools": ["AWS", "Docker", "Tableau", "Linux", "GitHub"]
   }
 }

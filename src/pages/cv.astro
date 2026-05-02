@@ -15,9 +15,10 @@ function dash(str: string) {
     <div>
       <h1 class="text-2xl font-bold mb-1">CV</h1>
       <p class="text-sm text-gray-500">
-        {cv.contact.location} · {cv.contact.phone} · {cv.contact.email} ·
-        <a href={`https://${cv.contact.github}`} target="_blank" rel="noopener" class="hover:underline">{cv.contact.github}</a> ·
-        <a href={`https://${cv.contact.linkedin}`} target="_blank" rel="noopener" class="hover:underline">LinkedIn</a>
+        {cv.contact.location} · {cv.contact.phone} ·
+        <a href={`mailto:${cv.contact.email}`} class="text-blue-500 hover:underline">{cv.contact.email}</a> ·
+        <a href={`https://${cv.contact.github}`} target="_blank" rel="noopener" class="text-blue-500 hover:underline">{cv.contact.github}</a> ·
+        <a href={`https://${cv.contact.linkedin}`} target="_blank" rel="noopener" class="text-blue-500 hover:underline">LinkedIn</a>
       </p>
     </div>
     <Link href="/ericleonen-cv.pdf" class="flex items-center gap-1.5 text-sm shrink-0 ml-6" external={true}>
@@ -57,7 +58,7 @@ function dash(str: string) {
       {cv.research.map(r => (
         <div>
           {r.link
-            ? <a href={r.link} target="_blank" rel="noopener" class="font-medium hover:underline">{r.title}</a>
+            ? <a href={r.link} target="_blank" rel="noopener" class="font-medium text-blue-500 hover:underline">{r.title}</a>
             : <p class="font-medium">{r.title}</p>
           }
           <div class="flex justify-between items-baseline">

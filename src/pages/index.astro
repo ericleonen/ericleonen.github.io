@@ -110,7 +110,15 @@ function parseLinks(text: string): Array<{ text: string; url?: string }> {
       document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {
         const date = el.dataset.countdown;
         if (!date) return;
-        const diff = new Date(date).setHours(0, 0, 0, 0) - new Date().setHours(0, 0, 0, 0);
+        const [ey, em, ed] = date.split('-').map(Number);
+        const eventUTC = Date.UTC(ey, em - 1, ed);
+        const todaySeattle = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'America/Los_Angeles',
+          year: 'numeric', month: '2-digit', day: '2-digit',
+        }).format(new Date());
+        const [ty, tm, td] = todaySeattle.split('-').map(Number);
+        const todayUTC = Date.UTC(ty, tm - 1, td);
+        const diff = eventUTC - todayUTC;
         if (diff < 0) return;
         const days = Math.round(diff / 86400000);
         el.textContent = days === 0 ? '(today!!!)' : days === 1 ? '(tomorrow!)' : `(${days} days left)`;

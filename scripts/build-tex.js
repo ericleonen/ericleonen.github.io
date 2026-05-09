@@ -60,8 +60,8 @@ ${cv.interests.join(', ')}
 
 \\section{Education}
 
-${cv.education.map(edu => `\\textbf{${esc(edu.institution)}} \\hfill ${esc(edu.location)} \\\\
-${esc(edu.degree)} \\hfill ${esc(edu.graduated)} \\\\
+${cv.education.map(edu => `\\textbf{${esc(edu.institution)}}, ${esc(edu.location)} \\hfill ${esc(edu.graduated)} \\\\
+${esc(edu.degree)} \\\\
 GPA: ${esc(edu.gpa)}/4.0 \\\\[2pt]
 \\textit{Relevant Coursework:} ${edu.coursework.map(esc).join(', ')}`).join('\n\n')}
 

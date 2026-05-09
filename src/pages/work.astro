@@ -11,13 +11,13 @@ const allWork = await getCollection('work');
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.gif']);
 
 function getWorkImages(id: string): { src: string; alt: string }[] {
-  const dir = path.join(process.cwd(), 'public', id);
+  const dir = path.join(process.cwd(), 'public', 'work', id);
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir)
     .filter(f => IMAGE_EXTS.has(path.extname(f).toLowerCase()))
     .sort()
     .map(f => ({
-      src: `/${id}/${f}`,
+      src: `/work/${id}/${f}`,
       alt: path.basename(f, path.extname(f)),
     }));
 }

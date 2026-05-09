@@ -10,8 +10,6 @@ workingOn:
     date: "2026-05-25"
   - text: "Writing [Who Hears the Fed?](https://github.com/ericleonen/who-hears-the-fed), a study of the effect of monetary policy on household inflation expectations"
     date: "2026-05-15"
-  - text: "Training for my first 8k, [Beat the Bridge](https://www2.breakthrought1d.org/site/TR?fr_id=10543&pg=entry&utm_source=google&utm_medium=paidsearch&utm_campaign=sld_walk&utm_content=beatthebridge-brpok&s_src=sld_paidsearch&s_subsrc=google-walk-brpok-251-20251101&gad_source=1&gad_campaignid=23210977103&gbraid=0AAAAA9UW2c81R1v6ENYAlrjXBbFmCI7qR&gclid=CjwKCAjw-J3OBhBuEiwAwqZ_h580UVf7q0OBe3WcWvQW9HjFZtx2ek7UA_ap4PFRQWvECImVkiSngxoCjv4QAvD_BwE)"
-    date: "2026-05-09"
   - text: "Preparing applications to economics predocs"
     date: "2026-08-01"
 ---

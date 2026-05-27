@@ -6,10 +6,11 @@ emails:
   - "ericleonen [at] gmail.com"
   - "eol05 [at] uw.edu"
 workingOn:
-  - text: "Improving [TheoremSearch](https://github.com/uw-math-ai/TheoremSearch) by making the world's largest graph of mathematical statements; targeting [EMNLP 2026](https://2026.emnlp.org/)"
-    date: "2026-05-25"
-  - text: "Writing [Who Hears the Fed?](https://github.com/ericleonen/who-hears-the-fed), a study of the effect of monetary policy on household inflation expectations"
-    date: "2026-05-15"
+  - text: "Improving [TheoremSearch](https://github.com/uw-math-ai/TheoremSearch) by making the world's largest mathematics dependency graph"
+  - text: "Predicting the effects of Washington's [Millionaire's Tax](https://governor.wa.gov/news/2026/governor-ferguson-signs-millionaires-tax-law) by analyzing the causal effect of capital gains taxes on wealth migration"
+    date: "2026-06-11"
+  - text: "Training for a [Fourth of July 5K](https://runsignup.com/Race/WA/Edmonds/TheEdmonds4thOfJuly5K)"
+    date: "2026-07-04"
   - text: "Preparing applications to economics predocs"
     date: "2026-08-01"
 ---

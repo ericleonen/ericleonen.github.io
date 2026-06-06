@@ -8,7 +8,7 @@ emails:
 workingOn:
   - text: "Improving [TheoremSearch](https://github.com/uw-math-ai/TheoremSearch) by making the world's largest mathematics dependency graph"
   - text: "Inspired by the [birth of EconLib](https://x.com/axiommathai/status/2061863820633727222), teaching myself Lean by completing the [Natural Number Game](https://adam.math.hhu.de/#/g/leanprover-community/nng4)"
-    date: "2026-14-06"
+    date: "2026-06-14"
   - text: "Training for a [Fourth of July 5K](https://runsignup.com/Race/WA/Edmonds/TheEdmonds4thOfJuly5K)"
     date: "2026-07-04"
   - text: "Preparing applications to economics predocs, focusing on my writing sample on the effect of Washington's [Millionaire's Tax](https://governor.wa.gov/news/2026/governor-ferguson-signs-millionaires-tax-law) on wealth migration"

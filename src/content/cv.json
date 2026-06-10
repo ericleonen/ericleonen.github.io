@@ -11,7 +11,7 @@
   "interests": [
     "Causal Inference & Econometrics",
     "Macroeconomics & Monetary Policy",
-    "LLM Reasoning",
+    "Formalized LLM Reasoning",
     "Economics of AI"
   ],
   "education": [
@@ -88,9 +88,14 @@
     },
     {
       "title": "Abraham Goo Endowed Scholarship",
-      "organization": "ACMS, University of Washington",
+      "organization": "ACMS Department, University of Washington",
       "dates": "Oct. 2025",
       "note": "Inaugural recipient"
+    },
+    {
+      "title": "Award for Outstanding Contribution in Mathematics",
+      "organization": "Math AI Lab, University of Washington",
+      "dates": "Jun. 2026"
     }
   ],
   "teaching": [

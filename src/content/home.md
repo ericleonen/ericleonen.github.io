@@ -15,6 +15,8 @@ workingOn:
     date: "2026-08-01"
 ---
 
-I’m a third-year Data Science and Statistics major at the University of Washington. I’m fascinated with macroeconomics, causal inference, and building AI tools utilizing large-scale data systems.
+I'm a third-year Data Science and Statistics major at the University of Washington. I'm curious about:
+- answering important questions about our macroeconomy with causal inference
+- exploring how formalized LLM reasoning can advance economic and mathematical theory.
 
 Outside of academics, I’m a [marathoner-in-training](https://www.strava.com/athletes/179900367), an [avid reader](https://www.goodreads.com/user/show/138760057-eric-leonen), and a Marvel Rivals [Vanguard main](https://rivalsmeta.com/player/1371311011).

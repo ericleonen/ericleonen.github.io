@@ -35,10 +35,10 @@ function parseLinks(text: string): Array<{ text: string; url?: string }> {
       alt={frontmatter.name}
       width={128}
       height={128}
-      class="w-32 h-32 sm:w-20 sm:h-20 shrink-0 rounded-full object-cover bg-gray-200 border-orange-200 border-4"
+      class="w-32 h-32 sm:w-20 sm:h-20 shrink-0 rounded-full object-cover bg-gray-200 border-orange-200 border-4 hover:animate-wiggle"
     />
     <div>
-      <h1 class="text-2xl font-semibold mb-3"><Highlight>{frontmatter.name}</Highlight></h1>
+      <h1 class="text-2xl font-bold mb-3"><Highlight>{frontmatter.name}</Highlight></h1>
 
       <!-- GitHub + LinkedIn -->
       <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm mb-1.5">
@@ -76,7 +76,7 @@ function parseLinks(text: string): Array<{ text: string; url?: string }> {
 
   <!-- About -->
   <section class="mb-10">
-    <h2 class="font-semibold mb-3"><Highlight>about me</Highlight></h2>
+    <h2 class="text-lg font-semibold mb-3"><Highlight>about me</Highlight></h2>
     <div class="text-gray-800 leading-relaxed prose prose-gray max-w-none">
       <Content />
     </div>
@@ -84,7 +84,7 @@ function parseLinks(text: string): Array<{ text: string; url?: string }> {
 
   <!-- Working On -->
   <section>
-    <h2 class="font-semibold mb-3"><Highlight>works in progress</Highlight></h2>
+    <h2 class="text-lg font-semibold mb-3"><Highlight>works in progress</Highlight></h2>
     <div class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2">
       {frontmatter.workingOn.map((item: { text: string; date?: string }) => (
         <Fragment>

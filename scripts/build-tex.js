@@ -56,7 +56,7 @@ const tex = `\\documentclass[11pt,letterpaper]{article}
 
 \\section{Research Interests}
 
-${cv.interests.join(', ')}
+${cv.interests.map(esc).join(', ')}
 
 \\section{Education}
 

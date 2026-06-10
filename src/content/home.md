@@ -15,7 +15,7 @@ workingOn:
     date: "2026-08-01"
 ---
 
-I'm a third-year Data Science and Statistics major at the University of Washington. I'm curious about:
+I'm a third-year Data Science and Statistics major at the University of Washington. I'm curious about
 - answering important questions about our macroeconomy with causal inference
 - exploring how formalized LLM reasoning can advance economic and mathematical theory.
 

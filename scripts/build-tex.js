@@ -76,7 +76,7 @@ ${r.bullets.map(b => `  \\item ${esc(b)}`).join('\n')}
 \\section{Honors \\& Awards}
 
 ${cv.awards.map(a => `\\textbf{${esc(a.title)}} \\hfill ${esc(a.dates)} \\\\
-\\textit{${esc(a.organization)}} \\hfill ${esc(a.note)}`).join(' \\\\[6pt]\n')}
+\\textit{${esc(a.organization)}}${a.note ? ` \\hfill ${esc(a.note)}` : ''}`).join(' \\\\[6pt]\n')}
 
 \\section{Teaching Experience}
 

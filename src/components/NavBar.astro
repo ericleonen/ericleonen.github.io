@@ -1,11 +1,15 @@
 ---
-import Link from './Link.astro';
-
-const links = [
-  { href: '/',         label: 'Home' },
-  { href: '/work',     label: 'Work' },
-  { href: '/cv',       label: 'CV' },
-  { href: '/trophies', label: '🏆' },
+// Grouped: formal stuff (left) and personal stuff (right)
+const groups = [
+  [
+    { href: '/',     label: 'Home' },
+    { href: '/work', label: 'Work' },
+    { href: '/cv',   label: 'CV' },
+  ],
+  [
+    { href: '/docs',     label: 'Docs' },
+    { href: '/trophies', label: '🏆' },
+  ],
 ];
 
 const current = Astro.url.pathname;
@@ -14,18 +18,24 @@ function isActive(href: string) {
   if (href === '/') return current === '/';
   return current === href || current.startsWith(href + '/');
 }
+
+const base = 'inline-block -rotate-1 px-1.5 py-0.5 rounded-[0.4em_0.7em_0.5em_0.6em] text-sm font-medium lowercase transition-colors duration-100 hover:bg-orange-200';
 ---
 
 <nav id="navbar" class="sticky top-0 z-50 bg-paper py-6 border-b border-transparent transition-colors duration-200">
-  <ul class="flex justify-center gap-8">
-    {links.map(link => (
-      <li>
-        <Link
-          href={link.href}
-          color="orange"
-          class={isActive(link.href) ? 'bg-orange-200' : ''}
-        >{link.label}</Link>
-      </li>
+  <ul class="flex justify-center items-center gap-6">
+    {groups.map((group, i) => (
+      <>
+        {i > 0 && <li aria-hidden="true" class="w-px h-4 bg-gray-300"></li>}
+        {group.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[base, isActive(link.href) && 'bg-orange-200']}
+            >{link.label}</a>
+          </li>
+        ))}
+      </>
     ))}
   </ul>
 </nav>

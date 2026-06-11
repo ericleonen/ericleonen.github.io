@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Highlight from '../../components/Highlight.astro';
+import DocCard from '../../components/DocCard.astro';
+import { getCollection } from 'astro:content';
+
+const docs = (await getCollection('docs'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Docs — Eric Leonen">
+  <h1 class="text-2xl font-bold mb-3"><Highlight>Docs</Highlight></h1>
+  <p class="text-gray-800 leading-relaxed mb-6">
+    My personal documentation... of myself?
+  </p>
+
+  {docs.length > 0
+    ? (
+      <>
+        <input
+          id="docs-search"
+          type="text"
+          placeholder="Search docs..."
+          autocomplete="off"
+          autofocus
+          class="w-full mb-8 px-3 py-2.5 text-sm bg-transparent border-2 border-black rounded focus:outline-none focus:ring-2 focus:ring-orange-300 placeholder:text-gray-400"
+        />
+        <div id="docs-list" class="divide-y divide-gray-200">
+          {docs.map(doc => (
+            <div class="doc-item py-6 first:pt-0 last:pb-0" data-title={doc.data.title.toLowerCase()}>
+              <DocCard
+                title={doc.data.title}
+                date={doc.data.date}
+                summary={doc.data.summary}
+                href={`/docs/${doc.id}`}
+              />
+            </div>
+          ))}
+        </div>
+        <p id="docs-empty" class="hidden text-sm text-gray-400">No docs match that.</p>
+      </>
+    )
+    : <p class="text-sm text-gray-400">Nothing here yet.</p>
+  }
+
+  <script>
+    const search = document.getElementById('docs-search') as HTMLInputElement | null;
+    const items = Array.from(document.querySelectorAll<HTMLElement>('.doc-item'));
+    const empty = document.getElementById('docs-empty');
+
+    search?.focus();
+
+    search?.addEventListener('input', () => {
+      const q = search.value.trim().toLowerCase();
+      let any = false;
+      items.forEach(item => {
+        const match = (item.dataset.title ?? '').includes(q);
+        item.classList.toggle('hidden', !match);
+        if (match) any = true;
+      });
+      empty?.classList.toggle('hidden', any);
+    });
+  </script>
+</Layout>

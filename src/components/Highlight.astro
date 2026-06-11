@@ -1,10 +1,11 @@
 ---
 interface Props {
   color?: 'yellow' | 'orange' | 'blue';
+  preserveCase?: boolean;
   class?: string;
 }
 
-const { color = 'orange', class: className } = Astro.props;
+const { color = 'orange', preserveCase = false, class: className } = Astro.props;
 
 const colorMap = {
   yellow: 'bg-yellow-200',
@@ -12,4 +13,4 @@ const colorMap = {
   blue:   'bg-blue-200',
 };
 ---
-<span class:list={['inline-block -rotate-1 px-1 -mx-0.5 rounded-[0.4em_0.7em_0.5em_0.6em] lowercase', colorMap[color], className]}><slot /></span>
+<span class:list={['inline-block -rotate-1 px-1 -mx-0.5 rounded-[0.4em_0.7em_0.5em_0.6em]', !preserveCase && 'lowercase', colorMap[color], className]}><slot /></span>

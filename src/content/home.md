@@ -8,7 +8,7 @@ emails:
 workingOn:
   - text: "Preparing applications to economics predocs, focusing on my writing sample on the effect of Washington's [Millionaire's Tax](https://governor.wa.gov/news/2026/governor-ferguson-signs-millionaires-tax-law) on wealth migration"
     date: "2026-06-20"
-  - text: "Inspired by the [birth of EconLib](https://x.com/axiommathai/status/2061863820633727222), teaching myself Lean by completing the ~~[Natural Number Game](https://adam.math.hhu.de/#/g/leanprover-community/nng4)~~ [Scribble](https://adam.math.hhu.de/#/g/hhu-adam/robo)"
+  - text: "Inspired by the [birth of EconLib](https://x.com/axiommathai/status/2061863820633727222), teaching myself Lean by completing [Scribble](https://adam.math.hhu.de/#/g/hhu-adam/robo)"
     date: "2026-07-03"
   - text: "Training for a [Fourth of July 5K](https://runsignup.com/Race/WA/Edmonds/TheEdmonds4thOfJuly5K)"
     date: "2026-07-04"

@@ -7,12 +7,20 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --color-paper: #FAF8F4;
   --animate-wiggle: wiggle 0.4s ease-in-out;
+  --animate-shake: shake 0.4s ease-in-out;
 }
 
 @keyframes wiggle {
   0%, 100% { transform: rotate(0deg); }
   25% { transform: rotate(-6deg); }
   75% { transform: rotate(6deg); }
+}
+
+/* Rocks side to side around the nav's resting -1deg tilt */
+@keyframes shake {
+  0%, 100% { transform: rotate(-1deg); }
+  25% { transform: rotate(-13deg); }
+  75% { transform: rotate(11deg); }
 }
 
 /* Style plain markdown <a> tags to match the Link component */

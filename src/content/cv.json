@@ -31,6 +31,12 @@
         "Continuous Modeling",
         "Macroeconomics",
         "Financial Economics"
+      ],
+      "courseworkShort": [
+        "Causal Inference",
+        "Machine Learning",
+        "Database Systems",
+        "Nonlinear Optimization"
       ]
     }
   ],
@@ -41,6 +47,7 @@
       "organization": "UW Math AI Lab",
       "location": "Seattle, WA",
       "dates": "Sep. 2025 -- Present",
+      "resume": "experience",
       "bullets": [
         "Built a semantic search engine over 9.2 million mathematical theorems using a vector embedding pipeline and AWS infrastructure",
         "Accepted to the 2026 ICLR Workshop on LLM Reasoning"
@@ -52,6 +59,10 @@
       "organization": "University of Washington",
       "location": "Seattle, WA",
       "dates": "Aug. 2025",
+      "resume": "projects",
+      "resumeBullets": [
+        "Tested for heterogeneity in Okun's Law across U.S. recession periods and states using 2005--2025 data in R"
+      ],
       "bullets": [
         "Examined how Okun's Law changed in the U.S. across recession periods and states using 2005--2025 data with R",
         "Found no evidence of coefficient heterogeneity across recession periods, and only weak evidence across states"
@@ -63,6 +74,10 @@
       "organization": "University of Washington",
       "location": "Seattle, WA",
       "dates": "Dec. 2025",
+      "resume": "projects",
+      "resumeBullets": [
+        "Modeled U.S., Japan, and German growth (1950--2023) with the Mankiw-Romer-Weil Solow model in Python, finding a SINDy-driven variant outperformed fixed-parameter ones"
+      ],
       "bullets": [
         "Analyzed how well the Mankiw-Romer-Weil Solow growth model captures economic dynamics of the U.S., Japan, and Germany from 1950--2023 with Python",
         "Found that a SINDy-driven model outperformed those with constant or time-varying exogenous parameters"
@@ -84,18 +99,21 @@
       "title": "Dean's List",
       "organization": "University of Washington",
       "dates": "Sep. 2023 -- Present",
-      "note": "Every quarter"
+      "note": "Every quarter",
+      "resume": true
     },
     {
       "title": "Abraham Goo Endowed Scholarship",
       "organization": "ACMS Department, University of Washington",
       "dates": "Oct. 2025",
-      "note": "Inaugural recipient"
+      "note": "Inaugural recipient",
+      "resume": true
     },
     {
       "title": "Award for Outstanding Contribution in Mathematics",
       "organization": "Math AI Lab, University of Washington",
-      "dates": "Jun. 2026"
+      "dates": "Jun. 2026",
+      "resume": true
     }
   ],
   "teaching": [
@@ -104,7 +122,22 @@
       "organization": "UW Math Study Center",
       "location": "Seattle, WA",
       "dates": "May 2024 -- Present",
-      "courses": "Precalculus, Calculus I--III"
+      "courses": "Precalculus, Calculus I--III",
+      "resume": "experience",
+      "bullets": [
+        "Tutor Precalculus and Calculus I--III and lead a team of peer tutors at UW's drop-in math center"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "HuskyCalcArchive",
+      "link": "https://huskycalcarchive.com/",
+      "dates": "Jan. 2026",
+      "resume": "projects",
+      "bullets": [
+        "Built an exam-question database for UW's MATH 124/5/6 calculus series, with a pipeline that captured and labeled 1700+ questions from archived test PDFs"
+      ]
     }
   ],
   "skills": {

@@ -19,11 +19,18 @@ function isActive(href: string) {
   return current === href || current.startsWith(href + '/');
 }
 
-const base = 'inline-block -rotate-1 px-1.5 py-0.5 rounded-[0.4em_0.7em_0.5em_0.6em] text-sm font-medium lowercase transition-colors duration-100 hover:bg-orange-200';
+// Text styling only — the orange "highlight" blob (#nav-highlight) tracks the active page.
+// Hover just signals "link" by turning the text blue.
+const item = 'relative z-10 inline-block -rotate-1 px-2 py-0.5 text-base font-medium lowercase transition-colors duration-100 hover:text-blue-500 focus-visible:text-blue-500';
 ---
 
-<nav id="navbar" class="sticky top-0 z-50 bg-paper py-6 border-b border-transparent transition-colors duration-200">
-  <ul class="flex justify-center items-center gap-6">
+<nav id="navbar" transition:persist class="sticky top-0 z-50 bg-paper py-6 border-b border-transparent transition-colors duration-200">
+  <ul class="relative flex justify-center items-center gap-5">
+    <span
+      id="nav-highlight"
+      aria-hidden="true"
+      class="pointer-events-none absolute left-0 top-0 z-0 text-base bg-orange-200 rounded-[0.4em_0.7em_0.5em_0.6em] opacity-0 transition-[width,height,transform,opacity] duration-300 ease-out"
+    ></span>
     {groups.map((group, i) => (
       <>
         {i > 0 && <li aria-hidden="true" class="w-px h-4 bg-gray-300"></li>}
@@ -31,7 +38,9 @@ const base = 'inline-block -rotate-1 px-1.5 py-0.5 rounded-[0.4em_0.7em_0.5em_0.
           <li>
             <a
               href={link.href}
-              class:list={[base, isActive(link.href) && 'bg-orange-200']}
+              data-nav-item
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              class:list={[item, link.href === '/trophies' && 'hover:animate-shake']}
             >{link.label}</a>
           </li>
         ))}
@@ -41,12 +50,54 @@ const base = 'inline-block -rotate-1 px-1.5 py-0.5 rounded-[0.4em_0.7em_0.5em_0.
 </nav>
 
 <script>
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 0) {
-      navbar?.classList.replace('border-transparent', 'border-gray-200');
-    } else {
-      navbar?.classList.replace('border-gray-200', 'border-transparent');
+  const navbar = document.getElementById('navbar')!;
+  const highlight = document.getElementById('nav-highlight');
+  const items = Array.from(navbar.querySelectorAll<HTMLAnchorElement>('a[data-nav-item]'));
+
+  function place(el: HTMLElement | null, animate: boolean) {
+    if (!highlight || !el) return;
+    if (!animate) highlight.style.transition = 'none';
+    highlight.style.width = `${el.offsetWidth}px`;
+    highlight.style.height = `${el.offsetHeight}px`;
+    highlight.style.transform = `translate(${el.offsetLeft}px, ${el.offsetTop}px) rotate(-1deg)`;
+    highlight.style.opacity = '1';
+    if (!animate) {
+      highlight.getBoundingClientRect(); // flush, then re-enable transitions
+      highlight.style.transition = '';
     }
+  }
+
+  // Active item is derived from the URL so it stays correct across client navigations
+  function activeItem(): HTMLAnchorElement | null {
+    const path = location.pathname;
+    return items.find(el => {
+      const href = new URL(el.href).pathname;
+      return href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+    }) ?? null;
+  }
+
+  let activeEl: HTMLAnchorElement | null = null;
+
+  // Blob follows the active page only — hover no longer moves it
+  window.addEventListener('resize', () => activeEl && place(activeEl, false));
+
+  const setBorder = () => {
+    const scrolled = window.scrollY > 0;
+    navbar.classList.toggle('border-gray-200', scrolled);
+    navbar.classList.toggle('border-transparent', !scrolled);
+  };
+  window.addEventListener('scroll', setBorder);
+
+  // Runs on the initial load AND after every client-side navigation.
+  // First run snaps into place; later runs slide the blob to the new page.
+  let settled = false;
+  document.addEventListener('astro:page-load', () => {
+    activeEl = activeItem();
+    items.forEach(el => el.removeAttribute('aria-current'));
+    activeEl?.setAttribute('aria-current', 'page');
+    if (activeEl) place(activeEl, settled);
+    else if (highlight) highlight.style.opacity = '0';
+    settled = true;
+    setBorder();
   });
 </script>

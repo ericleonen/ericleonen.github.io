@@ -107,22 +107,25 @@ function parseLinks(text: string): Array<{ text: string; url?: string }> {
     </div>
 
     <script>
-      document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {
-        const date = el.dataset.countdown;
-        if (!date) return;
-        const [ey, em, ed] = date.split('-').map(Number);
-        const eventUTC = Date.UTC(ey, em - 1, ed);
-        const todaySeattle = new Intl.DateTimeFormat('en-CA', {
-          timeZone: 'America/Los_Angeles',
-          year: 'numeric', month: '2-digit', day: '2-digit',
-        }).format(new Date());
-        const [ty, tm, td] = todaySeattle.split('-').map(Number);
-        const todayUTC = Date.UTC(ty, tm - 1, td);
-        const diff = eventUTC - todayUTC;
-        if (diff < 0) return;
-        const days = Math.round(diff / 86400000);
-        el.textContent = days === 0 ? '(today!!!)' : days === 1 ? '(tomorrow!)' : `(${days} days left)`;
-        el.className += days > 14 ? ' text-green-600' : days > 7 ? ' text-orange-600' : ' text-red-600';
+      // astro:page-load fires on first load and after every client-side navigation
+      document.addEventListener('astro:page-load', () => {
+        document.querySelectorAll<HTMLElement>('[data-countdown]').forEach(el => {
+          const date = el.dataset.countdown;
+          if (!date) return;
+          const [ey, em, ed] = date.split('-').map(Number);
+          const eventUTC = Date.UTC(ey, em - 1, ed);
+          const todaySeattle = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'America/Los_Angeles',
+            year: 'numeric', month: '2-digit', day: '2-digit',
+          }).format(new Date());
+          const [ty, tm, td] = todaySeattle.split('-').map(Number);
+          const todayUTC = Date.UTC(ty, tm - 1, td);
+          const diff = eventUTC - todayUTC;
+          if (diff < 0) return;
+          const days = Math.round(diff / 86400000);
+          el.textContent = days === 0 ? '(today!!!)' : days === 1 ? '(tomorrow!)' : `(${days} days left)`;
+          el.className += days > 14 ? ' text-green-600' : days > 7 ? ' text-orange-600' : ' text-red-600';
+        });
       });
     </script>
   </section>

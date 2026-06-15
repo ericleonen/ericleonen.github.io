@@ -6,7 +6,7 @@ emails:
   - "ericleonen [at] gmail.com"
   - "eol05 [at] uw.edu"
 workingOn:
-  - text: "Preparing applications to economics predocs, focusing on my writing sample on the effect of Washington's [Millionaire's Tax](https://governor.wa.gov/news/2026/governor-ferguson-signs-millionaires-tax-law) on wealth migration"
+  - text: "Preparing applications to economics predocs, focusing on my writing/coding sample: [The Effect of Washington's 2021 Capital Gains Tax on Wealth Migration](https://github.com/ericleonen/wa-cgt-migration)"
     date: "2026-06-20"
   - text: "Inspired by the [birth of EconLib](https://x.com/axiommathai/status/2061863820633727222), teaching myself Lean by completing [Scribble](https://adam.math.hhu.de/#/g/hhu-adam/robo)"
     date: "2026-07-03"

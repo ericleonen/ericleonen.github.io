@@ -1,5 +1,6 @@
 ---
 title: "Quotes"
+date: 2026-06-24
 summary: "Compilation of my favorite quotes to live by"
 ---
 

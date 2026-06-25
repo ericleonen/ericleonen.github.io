@@ -18,4 +18,4 @@ I'm a third-year Data Science and Statistics major at the University of Washingt
 - answering important questions about our macroeconomy with causal inference
 - exploring how formalized LLM reasoning can advance economic and mathematical theory.
 
-Outside of academics, I’m a 🏃🏽‍♂️‍➡️ [marathoner-in-training](https://www.strava.com/athletes/179900367), an 📖 [avid reader](https://www.goodreads.com/user/show/138760057-eric-leonen), a ⛳ [washed golfer](https://wjga.bluegolf.com/bluegolf/wjga22/event/wjga228/contest/9/contestant/568/scorecard.htm), and a ⚡ [Marvel Rivals Thor main](https://rivalsmeta.com/player/1371311011).
+Outside of academics, I’m a 🏃🏽‍♂️‍➡️ [marathoner-in-training](https://www.strava.com/athletes/179900367), an 📖 avid [reader](https://www.goodreads.com/user/show/138760057-eric-leonen), a ⛳ washed [golfer](https://wjga.bluegolf.com/bluegolf/wjga22/event/wjga228/contest/9/contestant/568/scorecard.htm), and a ⚡ Marvel Rivals [Thor main](https://rivalsmeta.com/player/1371311011).

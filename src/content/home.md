@@ -7,7 +7,7 @@ emails:
   - "eol05 [at] uw.edu"
 workingOn:
   - text: "Preparing applications to economics predocs, focusing on my writing/coding sample: [The Effect of Washington's 2021 Capital Gains Tax on Wealth Migration](https://github.com/ericleonen/wa-cgt-migration)"
-    date: "2026-06-20"
+    date: "2026-06-30"
   - text: "Inspired by the [birth of EconLib](https://x.com/axiommathai/status/2061863820633727222), teaching myself Lean by completing [Scribble](https://adam.math.hhu.de/#/g/hhu-adam/robo)"
     date: "2026-07-03"
   - text: "Training for a [Fourth of July 5K](https://runsignup.com/Race/WA/Edmonds/TheEdmonds4thOfJuly5K)"
@@ -18,4 +18,4 @@ I'm a third-year Data Science and Statistics major at the University of Washingt
 - answering important questions about our macroeconomy with causal inference
 - exploring how formalized LLM reasoning can advance economic and mathematical theory.
 
-Outside of academics, I’m a [marathoner-in-training](https://www.strava.com/athletes/179900367), an [avid reader](https://www.goodreads.com/user/show/138760057-eric-leonen), and a Marvel Rivals [Vanguard main](https://rivalsmeta.com/player/1371311011).
+Outside of academics, I’m a 🏃🏽‍♂️‍➡️ [marathoner-in-training](https://www.strava.com/athletes/179900367), an 📖 [avid reader](https://www.goodreads.com/user/show/138760057-eric-leonen), a ⛳ [washed golfer](https://wjga.bluegolf.com/bluegolf/wjga22/event/wjga228/contest/9/contestant/568/scorecard.htm), and a ⚡ [Marvel Rivals Thor main](https://rivalsmeta.com/player/1371311011).

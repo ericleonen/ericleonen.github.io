@@ -1,6 +1,6 @@
 ---
 title: "Quotes"
-date: 2026-06-24
+date: 2026-06-25
 summary: "Compilation of my favorite quotes to live by"
 ---
 
@@ -19,3 +19,4 @@ These quotes stay here so long as I can remember where they came from:
 5. > But I don't want comfort.
    > I want God, I want poetry, I want real danger, I want freedom, I want goodness.
    > I want sin.
+6. > I would rather discover one true cause than gain the kingdom of Persia.

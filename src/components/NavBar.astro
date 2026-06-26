@@ -1,4 +1,6 @@
 ---
+import Emoji from './Emoji.astro';
+
 // Grouped: formal stuff (left) and personal stuff (right)
 const groups = [
   [
@@ -8,7 +10,7 @@ const groups = [
   ],
   [
     { href: '/docs',     label: 'Docs' },
-    { href: '/trophies', label: '🏆' },
+    { href: '/trophies', label: '🏆', emoji: true },
   ],
 ];
 
@@ -40,8 +42,8 @@ const item = 'relative z-10 inline-block -rotate-1 px-2 py-0.5 text-base font-me
               href={link.href}
               data-nav-item
               aria-current={isActive(link.href) ? 'page' : undefined}
-              class:list={[item, link.href === '/trophies' && 'hover:animate-shake']}
-            >{link.label}</a>
+              class={item}
+            >{link.emoji ? <Emoji>{link.label}</Emoji> : link.label}</a>
           </li>
         ))}
       </>

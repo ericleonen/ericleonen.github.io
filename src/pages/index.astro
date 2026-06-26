@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Link from '../components/Link.astro';
 import Highlight from '../components/Highlight.astro';
+import Emoji from '../components/Emoji.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import profileImg from '../assets/profile.jpg';
@@ -79,6 +80,12 @@ function parseLinks(text: string): Array<{ text: string; url?: string }> {
     <h2 class="text-lg font-semibold mb-3"><Highlight>about me</Highlight></h2>
     <div class="text-gray-800 leading-relaxed prose prose-gray max-w-none">
       <Content />
+      <p>
+        Outside of academics, I'm a <Emoji>🏃🏽‍♂️‍➡️</Emoji> <Link href="https://www.strava.com/athletes/179900367" external>marathoner-in-training</Link>,
+        an <Emoji>📖</Emoji> avid <Link href="https://www.goodreads.com/user/show/138760057-eric-leonen" external>reader</Link>,
+        a <Emoji>⛳</Emoji> washed <Link href="https://wjga.bluegolf.com/bluegolf/wjga22/event/wjga228/contest/9/contestant/568/scorecard.htm" external>golfer</Link>,
+        and a <Emoji>⚡</Emoji> Marvel Rivals <Link href="https://rivalsmeta.com/player/1371311011" external>Thor main</Link>.
+      </p>
     </div>
   </section>
 

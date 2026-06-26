@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Highlight from '../components/Highlight.astro';
+import Emoji from '../components/Emoji.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -35,6 +36,6 @@ const images = fs.existsSync(dir)
         ))}
       </div>
     )
-    : <div class="text-6xl opacity-20 select-none">🏆</div>
+    : <div class="text-6xl opacity-20 select-none"><Emoji>🏆</Emoji></div>
   }
 </Layout>

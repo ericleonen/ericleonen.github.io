@@ -11,16 +11,8 @@ function dash(str: string) {
 ---
 
 <Layout title="CV — Eric Leonen">
-  <div class="flex justify-between items-start mb-8">
-    <div>
-      <h1 class="text-2xl font-bold mb-1"><Highlight>CV</Highlight></h1>
-      <p class="text-sm text-gray-500">
-        {cv.contact.location} · {cv.contact.phone} ·
-        <Link href={`mailto:${cv.contact.email}`}>{cv.contact.email}</Link> ·
-        <Link href={`https://${cv.contact.github}`} external>{cv.contact.github}</Link> ·
-        <Link href={`https://${cv.contact.linkedin}`} external>LinkedIn</Link>
-      </p>
-    </div>
+  <div class="flex justify-between items-start mb-1">
+    <h1 class="text-2xl font-bold"><Highlight>CV</Highlight></h1>
     <div class="flex flex-col items-end gap-1.5 sm:flex-row sm:items-center sm:gap-2 shrink-0 ml-6 text-sm">
       <Link href="/ericleonen-cv.pdf" class="flex items-center gap-1.5" external={true}>
         <Icon name="lucide:file-text" class="w-4 h-4 shrink-0" />
@@ -33,6 +25,12 @@ function dash(str: string) {
       </Link>
     </div>
   </div>
+  <p class="text-sm text-gray-500 mb-8">
+    {cv.contact.location} · {cv.contact.phone} ·
+    {cv.contact.email.replace('@', ' [at] ')} ·
+    <Link href={`https://${cv.contact.github}`} external>{cv.contact.github}</Link> ·
+    <Link href={`https://${cv.contact.linkedin}`} external>LinkedIn</Link>
+  </p>
 
   <section class="mb-10">
     <h2 class="text-lg font-semibold mb-4"><Highlight>research interests</Highlight></h2>

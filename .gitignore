@@ -28,3 +28,7 @@ pnpm-debug.log*
 
 # Claude
 .claude
+
+# public pdfs and tex
+public/*.pdf
+public/*.tex

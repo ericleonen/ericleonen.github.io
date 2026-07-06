@@ -9,8 +9,6 @@ workingOn:
   - text: "Applying, applying, applying to economics predocs with the help of [FindMyPredoc.com](https://findmypredoc.ericleonen.com)"
   - text: "Researching [The Effect of Washington's 2021 Capital Gains Tax on Wealth Migration](https://github.com/ericleonen/wa-cgt-migration)"
     date: "2026-07-12"
-  - text: "Inspired by the [birth of EconLib](https://x.com/axiommathai/status/2061863820633727222), teaching myself Lean by completing [Scribble](https://adam.math.hhu.de/#/g/hhu-adam/robo)"
-    date: "2026-07-03"
   - text: "Training for a [local 5K](https://runsignup.com/Race/WA/Mukilteo/RunAMuk)"
     date: "2026-08-22"
 ---

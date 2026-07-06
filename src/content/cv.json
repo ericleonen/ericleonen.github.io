@@ -18,7 +18,6 @@
       "institution": "University of Washington",
       "location": "Seattle, WA",
       "degree": "B.S. Applied and Computational Mathematical Sciences: Data Science and Statistics",
-      "degreeShort": "B.S. ACMS: Data Science and Statistics",
       "graduated": "Sep. 2023 -- Jun. 2027",
       "gpa": "3.99/4.00",
       "coursework": [
@@ -72,7 +71,6 @@
       "organization": "University of Washington",
       "location": "Seattle, WA",
       "dates": "Dec. 2025",
-      "resume": "projects",
       "bullets": [
         "Analyzed how well the Mankiw-Romer-Weil Solow growth model captures economic dynamics of the U.S., Japan, and Germany from 1950--2023 with Python",
         "Found that a SINDy-driven model outperformed those with constant or time-varying exogenous parameters"
@@ -94,21 +92,24 @@
       "title": "Dean's List",
       "organization": "University of Washington",
       "dates": "Sep. 2023 -- Present",
-      "note": "Every quarter",
-      "resume": true
+      "note": "Every quarter"
     },
     {
       "title": "Abraham Goo Endowed Scholarship",
       "organization": "ACMS Department, University of Washington",
       "dates": "Oct. 2025",
-      "note": "Inaugural recipient",
-      "resume": true
+      "note": "Inaugural recipient"
     },
     {
       "title": "Award for Outstanding Contribution in Mathematics",
       "organization": "Math AI Lab, University of Washington",
-      "dates": "Jun. 2026",
-      "resume": true
+      "dates": "Jun. 2026"
+    },
+    {
+      "title": "Invitation to YC's 2026 AI Startup School",
+      "organization": "Y Combinator",
+      "dates": "Jul. 2026",
+      "note": "Accepted"
     }
   ],
   "teaching": [
@@ -118,28 +119,8 @@
       "location": "Seattle, WA",
       "dates": "May 2024 -- Present",
       "courses": "Precalculus, Calculus I--III",
-      "resume": "experience",
       "bullets": [
         "Tutor Precalculus and Calculus I--III and lead a team of peer tutors at UW's drop-in math center"
-      ]
-    }
-  ],
-  "projects": [
-    {
-      "title": "FindMyPredoc.com",
-      "link": "https://findmypredoc.ericleonen.com",
-      "dates": "Jul. 2026",
-      "bullets": [
-        "Designed a fully automated, LLM-powered job board for predoctoral researcher position openings"
-      ]
-    },
-    {
-      "title": "HuskyCalcArchive",
-      "link": "https://huskycalcarchive.com/",
-      "dates": "Jan. 2026",
-      "resume": "projects",
-      "bullets": [
-        "Built an exam-question database for UW's MATH 124/5/6 calculus series, with a pipeline that captured and labeled 1700+ questions from archived test PDFs"
       ]
     }
   ],

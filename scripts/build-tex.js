@@ -121,63 +121,6 @@ ${skillsTex()}
 `;
 }
 
-// ---- One-page resume (industry framing) ----
-function buildResume() {
-  const experience = [...cv.research, ...cv.teaching].filter(e => e.resume === 'experience');
-  const projects = [...cv.research, ...(cv.projects ?? [])].filter(e => e.resume === 'projects');
-  const awards = cv.awards.filter(a => a.resume);
-  const bulletsFor = e => e.resumeBullets ?? e.bullets ?? [];
-
-  return `\\documentclass[10pt,letterpaper]{article}
-\\usepackage[top=0.5in,bottom=0.5in,left=0.6in,right=0.6in]{geometry}
-\\usepackage[T1]{fontenc}
-\\usepackage{lmodern}
-\\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue]{hyperref}
-\\usepackage{enumitem}
-\\usepackage{titlesec}
-
-\\pagestyle{empty}
-\\setlength{\\parindent}{0pt}
-\\setlength{\\parskip}{0pt}
-
-\\titleformat{\\section}{\\large\\bfseries}{}{0em}{}[\\vspace{-4pt}\\rule{\\textwidth}{0.4pt}]
-\\titlespacing*{\\section}{0pt}{8pt}{4pt}
-
-\\setlist[itemize]{leftmargin=1.5em,topsep=1pt,itemsep=0pt,parsep=0pt}
-
-\\begin{document}
-
-${header()}
-
-\\vspace{4pt}
-
-\\section{Education}
-
-${cv.education.map(edu => `\\textbf{${esc(edu.institution)}}, ${esc(edu.location)} \\hfill ${esc(edu.graduated)} \\\\
-${esc(edu.degreeShort)} \\\\
-GPA: ${esc(edu.gpa)}/4.0 \\\\[2pt]
-\\textit{Relevant Coursework:} ${(edu.courseworkShort ?? edu.coursework).map(esc).join(', ')}`).join('\n\n')}
-
-\\section{Experience}
-
-${experience.map(e => entry(e, bulletsFor(e))).join('\n\\vspace{4pt}\n')}
-
-\\section{Projects}
-
-${projects.map(e => entry(e, bulletsFor(e))).join('\n\\vspace{4pt}\n')}
-
-\\section{Skills}
-
-${skillsTex()}
-
-\\section{Honors \\& Awards}
-
-${awardsTex(awards)}
-
-\\end{document}
-`;
-}
-
 async function compile(tex, name) {
   const res = await fetch('https://latex.ytotech.com/builds/sync', {
     method: 'POST',
@@ -193,11 +136,8 @@ async function compile(tex, name) {
 }
 
 const cvTex = buildCV();
-const resumeTex = buildResume();
 writeFileSync(join(__dirname, '../public/ericleonen-cv.tex'), cvTex);
-writeFileSync(join(__dirname, '../public/ericleonen-resume.tex'), resumeTex);
-console.log('Generated public/ericleonen-cv.tex and public/ericleonen-resume.tex');
+console.log('Generated public/ericleonen-cv.tex');
 
-console.log('Compiling PDFs...');
+console.log('Compiling PDF...');
 await compile(cvTex, 'ericleonen-cv');
-await compile(resumeTex, 'ericleonen-resume');

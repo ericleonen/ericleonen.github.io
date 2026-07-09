@@ -20,3 +20,6 @@ These quotes stay here so long as I can remember where they came from:
    > I want God, I want poetry, I want real danger, I want freedom, I want goodness.
    > I want sin.
 6. > I would rather discover one true cause than gain the kingdom of Persia.
+7. > Far to the west, across the sea, there is a place called Vinland.
+   > It is warm and fertile, far from slavery and the flames of war.
+   > No one can reach you there.

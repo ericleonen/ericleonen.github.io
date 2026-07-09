@@ -34,11 +34,21 @@
   ],
   "research": [
     {
+      "title": "The Effect of Washington's 2021 Capital Gains Tax on Wealth Migration",
+      "link": "https://drive.google.com/file/d/1KiKjG4HskirD6ZxklH8-1iwy5tTWYWSm/view?usp=sharing",
+      "dates":"Jun. 2026 -- Jul. 2026",
+      "bullets": [
+        "Estimated the causal effect of Washington's 7% capital gains tax on high-income out-migration in 2021",
+        "Built a synthetic control unit via a differences-in-differences design, matched on Washington's low-income migration pre-trends",
+        "Found statistically significant evidence, via permutation placebo test, of moderate high-income out-migration caused by the tax"
+      ]
+    },
+    {
       "title": "TheoremGraph: Bridging Formal and Informal Mathematics",
       "link": "https://arxiv.org/abs/2606.25363",
       "organization": "UW Math AI Lab",
       "location": "Seattle, WA",
-      "dates": "Mar. -- Jun. 2026",
+      "dates": "Mar. 2026 -- Jun. 2026",
       "bullets": [
         "Built a database of 11.8 million mathematical theorems and their 18 million dependencies from informal sources"
       ]
@@ -57,8 +67,6 @@
     {
       "title": "The Stability of Okun's Law Across Time and Space",
       "link": "https://drive.google.com/file/d/1X0vYUTDUBq5AYZpU16YYuxfxwuCONm03/view?usp=sharing",
-      "organization": "University of Washington",
-      "location": "Seattle, WA",
       "dates": "Aug. 2025",
       "bullets": [
         "Examined how Okun's Law changed in the U.S. across recession periods and states using 2005--2025 data with R",
@@ -80,7 +88,7 @@
       "title": "Statistics Directed Reading Program",
       "organization": "Department of Statistics, University of Washington",
       "location": "Seattle, WA",
-      "dates": "Sep. -- Dec. 2025",
+      "dates": "Sep. 2025 -- Dec. 2025",
       "bullets": [
         "Studied econometric causal estimators under faculty mentorship, with emphasis on identification strategies and their theoretical foundations",
         "Delivered a 15-minute presentation on the instrumental variables estimator applied to a job training program efficacy study"

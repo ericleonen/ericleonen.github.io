@@ -4,6 +4,7 @@ type: research
 date: 2026-07-08
 links:
   - { label: "paper", url: "https://drive.google.com/file/d/1KiKjG4HskirD6ZxklH8-1iwy5tTWYWSm/view?usp=sharing" }
+  - { label: "article", url: "https://medium.com/@ericleonen/what-causal-inference-has-to-say-about-washington-states-millionaires-tax-d4e5433721e4" }
   - { label: "code", url: "https://github.com/ericleonen/wa-cgt-migration" }
 ---
 

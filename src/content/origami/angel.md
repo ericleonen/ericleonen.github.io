@@ -5,5 +5,4 @@ designer: "Tadashi Mori"
 paper: "45 cm double tissue"
 ---
 
-Pleated robe, raised wings, arms folded out of the same square. The skirt is what
-sells it — it has to flare without any cuts holding it open.
+Extremely satisfied with the wings' shaping, though dress, torso, arms, and face could have been shaped better. My first human figure I'm happy with.

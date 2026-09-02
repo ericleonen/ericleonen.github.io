@@ -1,5 +1,6 @@
 ---
 title: "Angel"
+date: 2026-08-20
 designer: "Tadashi Mori"
 paper: "45 cm double tissue"
 ---

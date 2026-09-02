@@ -1,5 +1,6 @@
 ---
 title: "Beetle"
+date: 2026-08-09
 designer: "Jo Nakashima"
 paper: "45 cm double tissue"
 ---

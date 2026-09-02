@@ -32,6 +32,7 @@ const models = await Promise.all(
     formattedDate: model.data.date?.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
+      day: 'numeric',
     }),
     Content: (await render(model)).Content,
   }))
@@ -41,7 +42,7 @@ const models = await Promise.all(
 <Layout title="Origami — Eric Leonen" description="Origami models folded by Eric Leonen.">
   <h1 class="text-2xl font-bold mb-3"><Highlight preserveCase>Origami</Highlight></h1>
   <p class="text-gray-800 leading-relaxed mb-10">
-    Paper I've folded. One square, no cuts, no glue &mdash; usually.
+    Paper I've folded, newest first. One square, no cuts, no glue &mdash; usually.
   </p>
 
   {models.length > 0
@@ -108,7 +109,7 @@ const models = await Promise.all(
     )
     : (
       <div class="text-center py-10">
-        <div class="text-5xl"><OrigamiIcon class="opacity-30" /></div>
+        <OrigamiIcon class="!h-16 opacity-30" />
         <p class="text-sm text-gray-400 mt-5">No models here yet. Paper's in the mail.</p>
       </div>
     )

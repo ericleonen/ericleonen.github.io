@@ -1,5 +1,6 @@
 ---
 title: "Fiery Dragon"
+date: 2026-08-13
 designer: "Kade Chen"
 paper: "45 cm double tissue"
 ---

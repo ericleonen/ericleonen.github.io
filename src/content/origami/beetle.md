@@ -5,5 +5,4 @@ designer: "Jo Nakashima"
 paper: "45 cm double tissue"
 ---
 
-Six legs, each jointed, plus a horn and a shelled back. Shaping the abdomen into
-something rounded rather than flat took longer than folding the legs.
+My first try using double tissue origami paper. I never would have been able to shape the legs without the thin paper!

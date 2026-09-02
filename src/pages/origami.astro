@@ -120,7 +120,8 @@ const models = await Promise.all(
     id="origami-lightbox"
     class="m-auto max-w-[92vw] max-h-[92vh] bg-transparent backdrop:bg-black/70 p-0"
   >
-    <img id="origami-lightbox-img" src="" alt="" class="max-w-[92vw] max-h-[92vh] w-auto h-auto rounded" />
+    <!-- No src until a model is picked: an empty src="" makes some browsers re-request the page. -->
+    <img id="origami-lightbox-img" alt="" class="max-w-[92vw] max-h-[92vh] w-auto h-auto rounded" />
   </dialog>
 
   <script>

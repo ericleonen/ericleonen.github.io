@@ -30,9 +30,15 @@ const origami = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/origami' }),
   schema: z.object({
     title: z.string(),
-    date: z.date(),
-    // Optional — only needed if the photo's filename differs from the .md's.
-    // May be a bare filename ("crane.jpg") or an absolute path ("/origami/crane.jpg").
+    // Everything below is optional — a title and a photo are enough to publish.
+    // Dated models sort newest-first ahead of undated ones.
+    date: z.date().optional(),
+    designer: z.string().optional(),
+    designerUrl: z.string().optional(),
+    // Free text, shown as-is: "45 cm double tissue", "20 cm kami", ...
+    paper: z.string().optional(),
+    // Only needed if the photo's filename differs from the .md's. May be a bare
+    // filename ("crane.jpg") or an absolute path ("/origami/crane.jpg").
     image: z.string().optional(),
   }),
 });

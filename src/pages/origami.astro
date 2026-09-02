@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Highlight from '../components/Highlight.astro';
+import Link from '../components/Link.astro';
 import OrigamiIcon from '../components/OrigamiIcon.astro';
 import { getCollection, render } from 'astro:content';
 import fs from 'node:fs';
@@ -20,38 +21,40 @@ function resolveImage(id: string, image?: string): string | null {
   return null;
 }
 
+// Newest first; undated models keep to the back rather than jumping the queue.
+const byDate = (a: { data: { date?: Date } }, b: { data: { date?: Date } }) =>
+  (b.data.date?.valueOf() ?? -Infinity) - (a.data.date?.valueOf() ?? -Infinity);
+
 const models = await Promise.all(
-  (await getCollection('origami'))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .map(async model => ({
-      ...model,
-      src: resolveImage(model.id, model.data.image),
-      formattedDate: model.data.date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-      }),
-      Content: (await render(model)).Content,
-    }))
+  (await getCollection('origami')).sort(byDate).map(async model => ({
+    ...model,
+    src: resolveImage(model.id, model.data.image),
+    formattedDate: model.data.date?.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+    }),
+    Content: (await render(model)).Content,
+  }))
 );
 ---
 
 <Layout title="Origami — Eric Leonen" description="Origami models folded by Eric Leonen.">
-  <h1 class="text-2xl font-bold mb-3"><Highlight>Origami</Highlight></h1>
-  <p class="text-gray-800 leading-relaxed mb-8">
-    Paper I've folded, newest first. One square, no cuts, no glue &mdash; usually.
+  <h1 class="text-2xl font-bold mb-3"><Highlight preserveCase>Origami</Highlight></h1>
+  <p class="text-gray-800 leading-relaxed mb-10">
+    Paper I've folded. One square, no cuts, no glue &mdash; usually.
   </p>
 
   {models.length > 0
     ? (
       <div class="divide-y divide-gray-200">
         {models.map(model => (
-          <figure class="py-8 first:pt-0 last:pb-0">
+          <figure class="py-10 first:pt-0 last:pb-0">
             {model.src && (
               <button
                 type="button"
                 data-lightbox-src={model.src}
                 data-lightbox-alt={model.data.title}
-                class="block w-full mb-4 cursor-zoom-in"
+                class="block w-full mb-5 cursor-zoom-in"
                 aria-label={`View ${model.data.title} larger`}
               >
                 <img
@@ -59,13 +62,42 @@ const models = await Promise.all(
                   alt={model.data.title}
                   loading="lazy"
                   decoding="async"
-                  class="w-full max-h-[32rem] object-contain rounded border border-gray-200 bg-white transition-transform duration-200 hover:-translate-y-1"
+                  class="block mx-auto w-auto max-w-full max-h-[32rem] rounded border border-gray-200 transition-transform duration-200 hover:-translate-y-1"
                 />
               </button>
             )}
+
             <figcaption>
-              <h2 class="font-medium">{model.data.title}</h2>
-              <p class="text-xs text-gray-400 mt-1">{model.formattedDate}</p>
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h2 class="font-medium">{model.data.title}</h2>
+                {model.formattedDate && (
+                  <span class="text-xs text-gray-400">{model.formattedDate}</span>
+                )}
+              </div>
+
+              <!-- Credit where it's due: the designer, and what it was folded from. -->
+              {(model.data.designer || model.data.paper) && (
+                <dl class="flex flex-wrap gap-x-6 gap-y-1 mt-3 text-sm">
+                  {model.data.designer && (
+                    <div class="flex gap-2">
+                      <dt class="text-gray-400 shrink-0">designed by</dt>
+                      <dd class="text-gray-700">
+                        {model.data.designerUrl
+                          ? <Link href={model.data.designerUrl} external>{model.data.designer}</Link>
+                          : model.data.designer
+                        }
+                      </dd>
+                    </div>
+                  )}
+                  {model.data.paper && (
+                    <div class="flex gap-2">
+                      <dt class="text-gray-400 shrink-0">folded from</dt>
+                      <dd class="text-gray-700">{model.data.paper}</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
+
               <div class="text-sm text-gray-700 mt-3 prose prose-sm prose-gray max-w-none">
                 <model.Content />
               </div>
@@ -76,8 +108,8 @@ const models = await Promise.all(
     )
     : (
       <div class="text-center py-10">
-        <OrigamiIcon class="!h-14 opacity-25" />
-        <p class="text-sm text-gray-400 mt-4">No models here yet. Paper's in the mail.</p>
+        <div class="text-5xl"><OrigamiIcon class="opacity-30" /></div>
+        <p class="text-sm text-gray-400 mt-5">No models here yet. Paper's in the mail.</p>
       </div>
     )
   }

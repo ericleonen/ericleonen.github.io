@@ -1,6 +1,10 @@
 ---
-title: "Model name"
+title: "Model Name"
+# All optional. Dated models sort newest-first, ahead of undated ones.
 date: 2026-01-01
+designer: "Designer Name"
+designerUrl: "https://example.com"
+paper: "45 cm double tissue"
 ---
 
 Copy this file to `src/content/origami/<name>.md`, drop the photo at

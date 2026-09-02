@@ -11,13 +11,19 @@ Two files, same name — that's the whole process:
 
    ```markdown
    ---
-   title: "Scorpion varileg"
+   title: "Scorpion Varileg"
    date: 2026-08-14
+   designer: "Robert Lang"
+   designerUrl: "https://langorigami.com"
+   paper: "40 cm double tissue"
    ---
 
-   Robert Lang's [scorpion](https://langorigami.com), folded from a 40cm square of
-   double tissue I made myself. The **hardest** part was the *sink fold* in the tail.
+   The **hardest** part was the *sink fold* in the tail.
    ```
+
+Only `title` is required. `designer` and `paper` render as a credit line under
+the title; `date` both displays and sorts (dated models come first, newest
+first, ahead of undated ones).
 
 The photo is matched to the caption by filename, so there's nothing else to wire
 up. The body is regular markdown — inline links, bold, italics all render.

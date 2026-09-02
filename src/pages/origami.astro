@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Highlight from '../components/Highlight.astro';
+import OrigamiIcon from '../components/OrigamiIcon.astro';
+import { getCollection, render } from 'astro:content';
+import fs from 'node:fs';
+import path from 'node:path';
+
+const IMAGE_EXTS = ['.webp', '.jpg', '.jpeg', '.png', '.gif'];
+
+// A model's photo is found by filename: src/content/origami/crane.md pairs with
+// public/origami/crane.<ext>. Frontmatter `image` overrides that if you'd rather
+// name them differently.
+function resolveImage(id: string, image?: string): string | null {
+  const dir = path.join(process.cwd(), 'public', 'origami');
+  if (image) return image.startsWith('/') ? image : `/origami/${image}`;
+  for (const ext of IMAGE_EXTS) {
+    if (fs.existsSync(path.join(dir, `${id}${ext}`))) return `/origami/${id}${ext}`;
+  }
+  return null;
+}
+
+const models = await Promise.all(
+  (await getCollection('origami'))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .map(async model => ({
+      ...model,
+      src: resolveImage(model.id, model.data.image),
+      formattedDate: model.data.date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+      }),
+      Content: (await render(model)).Content,
+    }))
+);
+---
+
+<Layout title="Origami — Eric Leonen" description="Origami models folded by Eric Leonen.">
+  <h1 class="text-2xl font-bold mb-3"><Highlight>Origami</Highlight></h1>
+  <p class="text-gray-800 leading-relaxed mb-8">
+    Paper I've folded, newest first. One square, no cuts, no glue &mdash; usually.
+  </p>
+
+  {models.length > 0
+    ? (
+      <div class="divide-y divide-gray-200">
+        {models.map(model => (
+          <figure class="py-8 first:pt-0 last:pb-0">
+            {model.src && (
+              <button
+                type="button"
+                data-lightbox-src={model.src}
+                data-lightbox-alt={model.data.title}
+                class="block w-full mb-4 cursor-zoom-in"
+                aria-label={`View ${model.data.title} larger`}
+              >
+                <img
+                  src={model.src}
+                  alt={model.data.title}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full max-h-[32rem] object-contain rounded border border-gray-200 bg-white transition-transform duration-200 hover:-translate-y-1"
+                />
+              </button>
+            )}
+            <figcaption>
+              <h2 class="font-medium">{model.data.title}</h2>
+              <p class="text-xs text-gray-400 mt-1">{model.formattedDate}</p>
+              <div class="text-sm text-gray-700 mt-3 prose prose-sm prose-gray max-w-none">
+                <model.Content />
+              </div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    )
+    : (
+      <div class="text-center py-10">
+        <OrigamiIcon class="!w-16 !h-16 opacity-30" />
+        <p class="text-sm text-gray-400 mt-4">No models here yet. Paper's in the mail.</p>
+      </div>
+    )
+  }
+
+  <!-- Lightbox -->
+  <dialog
+    id="origami-lightbox"
+    class="m-auto max-w-[92vw] max-h-[92vh] bg-transparent backdrop:bg-black/70 p-0"
+  >
+    <img id="origami-lightbox-img" src="" alt="" class="max-w-[92vw] max-h-[92vh] w-auto h-auto rounded" />
+  </dialog>
+
+  <script>
+    // astro:page-load fires on first load and after every client-side navigation
+    document.addEventListener('astro:page-load', () => {
+      const dialog = document.getElementById('origami-lightbox') as HTMLDialogElement | null;
+      const img = document.getElementById('origami-lightbox-img') as HTMLImageElement | null;
+      if (!dialog || !img) return;
+
+      document.querySelectorAll<HTMLButtonElement>('[data-lightbox-src]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          img.src = btn.dataset.lightboxSrc ?? '';
+          img.alt = btn.dataset.lightboxAlt ?? '';
+          dialog.showModal();
+        });
+      });
+
+      // Click anywhere (image included) to dismiss; Escape works for free.
+      dialog.addEventListener('click', () => dialog.close());
+    });
+  </script>
+</Layout>

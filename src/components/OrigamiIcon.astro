@@ -1,0 +1,33 @@
+---
+// A hand-made "emoji": a flat, folded-paper crane drawn as inline SVG, in the
+// site's orange palette. There is no origami emoji in Unicode, so this is one.
+// Sized in `em` so it sits on a text baseline like a real emoji does, and it
+// wiggles on hover just like <Emoji>.
+interface Props {
+  class?: string;
+  title?: string;
+}
+
+const { class: className, title = 'origami' } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 32 32"
+  role="img"
+  aria-label={title}
+  class:list={['inline-block w-[1.15em] h-[1.15em] align-[-0.22em] hover:animate-wiggle', className]}
+>
+  <title>{title}</title>
+  <!-- tail, swept up and back -->
+  <polygon points="17,18 31,3 30,11" fill="#fdba74" />
+  <!-- neck, tapering to the head -->
+  <polygon points="11,17 17,14 6,3" fill="#fb923c" />
+  <!-- head and beak -->
+  <polygon points="6,3 0,6 9,7" fill="#ea580c" />
+  <!-- body / keel -->
+  <polygon points="9,15 22,13 14,29" fill="#f97316" />
+  <!-- wing, catching the light -->
+  <polygon points="10,16 24,13 17,2" fill="#ffedd5" />
+  <!-- crease down the wing -->
+  <polygon points="17,2 24,13 18,14" fill="#fed7aa" />
+</svg>

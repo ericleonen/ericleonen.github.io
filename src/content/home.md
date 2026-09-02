@@ -7,7 +7,7 @@ emails:
   - "eol05 [at] uw.edu"
 # The "outside of academics" sentence on the home page is built from this list.
 # Each entry is one comma-separated clause: an emoji (or icon: "origami" for the
-# hand-drawn paper crane), the words to link, and where they point. Reorder, add,
+# stylized 折紙 mark), the words to link, and where they point. Reorder, add,
 # or remove entries and the sentence re-punctuates itself.
 outsideOfAcademics:
   intro: "Outside of academics, I"

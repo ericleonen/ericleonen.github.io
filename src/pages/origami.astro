@@ -71,18 +71,19 @@ const rows = justifyRows(withPhoto, { containerWidth: 848, targetHeight: 330, ga
           Each item's flex-grow is its aspect ratio, so every photo in a row
           lands at the same height and the row fills the width exactly. A
           non-justified trailing row keeps flex-grow at 0 so a lone photo sits
-          at its natural size instead of stretching across the page. Rows wrap
-          on narrow screens, and whatever wraps re-justifies itself.
+          at its natural size instead of stretching across the page. Below the
+          narrow breakpoint the rows collapse into one full-width column — see
+          the stylesheet at the foot of this file.
         -->
         <div class="flex flex-col gap-3">
           {rows.map(row => (
-            <div class="flex flex-wrap gap-3">
+            <div class="origami-row">
               {row.items.map(model => (
                 <button
                   type="button"
                   data-open={model.id}
-                  style={`flex: ${row.justified ? model.aspect : 0} 1 ${model.aspect * 220}px; max-width: 100%`}
-                  class="group relative block overflow-hidden rounded border border-gray-200 bg-white cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+                  style={`--aspect: ${model.aspect}; --grow: ${row.justified ? model.aspect : 0}`}
+                  class="origami-tile group relative block overflow-hidden rounded border border-gray-200 bg-white cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
                   aria-label={`About ${model.data.title}`}
                 >
                   <img
@@ -207,6 +208,30 @@ const rows = justifyRows(withPhoto, { containerWidth: 848, targetHeight: 330, ga
 </Layout>
 
 <style>
+  /* A row of photos. Each tile grows in proportion to its aspect ratio, so the
+     tiles in a row always land at the same height and the row fills the width
+     exactly — at any width, with no layout script. */
+  .origami-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .origami-tile {
+    flex: var(--grow) 1 calc(var(--aspect) * 220px);
+    max-width: 100%;
+  }
+
+  /* Too thin to sit two abreast: one column, every photo the same width. */
+  @media (max-width: 639px) {
+    .origami-row {
+      flex-direction: column;
+    }
+    .origami-tile {
+      flex: none;
+      width: 100%;
+    }
+  }
+
   /* Pops in from slightly small and low; the backdrop fades with it. The close
      animations need their own keyframe names rather than the opening ones run in
      reverse: keeping the same animation-name doesn't restart the animation, so

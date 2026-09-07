@@ -4,19 +4,21 @@ import Highlight from '../components/Highlight.astro';
 import Link from '../components/Link.astro';
 import OrigamiIcon from '../components/OrigamiIcon.astro';
 import { getCollection, render } from 'astro:content';
+import { imageSize } from '../lib/imageSize';
+import { justifyRows } from '../lib/justify';
 import fs from 'node:fs';
 import path from 'node:path';
 
 const IMAGE_EXTS = ['.webp', '.jpg', '.jpeg', '.png', '.gif'];
+const PHOTO_DIR = path.join(process.cwd(), 'public', 'origami');
 
 // A model's photo is found by filename: src/content/origami/crane.md pairs with
 // public/origami/crane.<ext>. Frontmatter `image` overrides that if you'd rather
 // name them differently.
-function resolveImage(id: string, image?: string): string | null {
-  const dir = path.join(process.cwd(), 'public', 'origami');
+function resolvePhoto(id: string, image?: string): string | null {
   if (image) return image.startsWith('/') ? image : `/origami/${image}`;
   for (const ext of IMAGE_EXTS) {
-    if (fs.existsSync(path.join(dir, `${id}${ext}`))) return `/origami/${id}${ext}`;
+    if (fs.existsSync(path.join(PHOTO_DIR, `${id}${ext}`))) return `/origami/${id}${ext}`;
   }
   return null;
 }
@@ -26,86 +28,94 @@ const byDate = (a: { data: { date?: Date } }, b: { data: { date?: Date } }) =>
   (b.data.date?.valueOf() ?? -Infinity) - (a.data.date?.valueOf() ?? -Infinity);
 
 const models = await Promise.all(
-  (await getCollection('origami')).sort(byDate).map(async model => ({
-    ...model,
-    src: resolveImage(model.id, model.data.image),
-    formattedDate: model.data.date?.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }),
-    Content: (await render(model)).Content,
-  }))
+  (await getCollection('origami')).sort(byDate).map(async model => {
+    const src = resolvePhoto(model.id, model.data.image);
+    const size = src ? imageSize(path.join(process.cwd(), 'public', src.replace(/^\//, ''))) : null;
+    return {
+      ...model,
+      src,
+      size,
+      // Square is a harmless guess for a photo we couldn't measure.
+      aspect: size ? size.width / size.height : 1,
+      formattedDate: model.data.date?.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }),
+      Content: (await render(model)).Content,
+    };
+  })
 );
+
+// Only photographed models are laid out in the grid; a model still waiting on
+// its photo is listed underneath rather than dropped.
+const withPhoto = models.filter(m => m.src);
+const withoutPhoto = models.filter(m => !m.src);
+
+// Packed against the widened column (max-w-4xl, 896px, less 24px padding each
+// side). The pixel widths here only decide which photos share a row — flexbox
+// does the real sizing, so rows stay justified at every viewport width.
+const rows = justifyRows(withPhoto, { containerWidth: 848, targetHeight: 330, gap: 12 });
 ---
 
-<Layout title="Origami — Eric Leonen" description="Origami models folded by Eric Leonen.">
+<Layout title="Origami — Eric Leonen" description="Origami models folded by Eric Leonen." wide>
   <h1 class="text-2xl font-bold mb-3"><Highlight preserveCase>Origami</Highlight></h1>
-  <p class="text-gray-800 leading-relaxed mb-10">
+  <p class="text-gray-800 leading-relaxed mb-8">
     Paper I've folded, newest first. One square, no cuts, no glue &mdash; usually.
+    Pick one to read about it.
   </p>
 
-  {models.length > 0
+  {withPhoto.length > 0 || withoutPhoto.length > 0
     ? (
-      <div class="divide-y divide-gray-200">
-        {models.map(model => (
-          <figure class="py-10 first:pt-0 last:pb-0">
-            {model.src && (
+      <>
+        <!--
+          Each item's flex-grow is its aspect ratio, so every photo in a row
+          lands at the same height and the row fills the width exactly. A
+          non-justified trailing row keeps flex-grow at 0 so a lone photo sits
+          at its natural size instead of stretching across the page. Rows wrap
+          on narrow screens, and whatever wraps re-justifies itself.
+        -->
+        <div class="flex flex-col gap-3">
+          {rows.map(row => (
+            <div class="flex flex-wrap gap-3">
+              {row.items.map(model => (
+                <button
+                  type="button"
+                  data-open={model.id}
+                  style={`flex: ${row.justified ? model.aspect : 0} 1 ${model.aspect * 220}px; max-width: 100%`}
+                  class="group relative block overflow-hidden rounded border border-gray-200 bg-white cursor-pointer transition-transform duration-200 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+                  aria-label={`About ${model.data.title}`}
+                >
+                  <img
+                    src={model.src}
+                    alt={model.data.title}
+                    width={model.size?.width}
+                    height={model.size?.height}
+                    loading="lazy"
+                    decoding="async"
+                    class="block w-full h-auto"
+                  />
+                  <span
+                    class="pointer-events-none absolute inset-x-0 bottom-0 bg-black/60 px-3 py-2 text-left text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  >{model.data.title}</span>
+                </button>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {withoutPhoto.length > 0 && (
+          <div class="mt-8 flex flex-wrap gap-2">
+            {withoutPhoto.map(model => (
               <button
                 type="button"
-                data-lightbox-src={model.src}
-                data-lightbox-alt={model.data.title}
-                class="block w-full mb-5 cursor-zoom-in"
-                aria-label={`View ${model.data.title} larger`}
-              >
-                <img
-                  src={model.src}
-                  alt={model.data.title}
-                  loading="lazy"
-                  decoding="async"
-                  class="block mx-auto w-auto max-w-full max-h-[32rem] rounded border border-gray-200 transition-transform duration-200 hover:-translate-y-1"
-                />
-              </button>
-            )}
-
-            <figcaption>
-              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <h2 class="font-medium">{model.data.title}</h2>
-                {model.formattedDate && (
-                  <span class="text-xs text-gray-400">{model.formattedDate}</span>
-                )}
-              </div>
-
-              <!-- Credit where it's due: the designer, and what it was folded from. -->
-              {(model.data.designer || model.data.paper) && (
-                <dl class="flex flex-wrap gap-x-6 gap-y-1 mt-3 text-sm">
-                  {model.data.designer && (
-                    <div class="flex gap-2">
-                      <dt class="text-gray-400 shrink-0">designed by</dt>
-                      <dd class="text-gray-700">
-                        {model.data.designerUrl
-                          ? <Link href={model.data.designerUrl} external>{model.data.designer}</Link>
-                          : model.data.designer
-                        }
-                      </dd>
-                    </div>
-                  )}
-                  {model.data.paper && (
-                    <div class="flex gap-2">
-                      <dt class="text-gray-400 shrink-0">folded from</dt>
-                      <dd class="text-gray-700">{model.data.paper}</dd>
-                    </div>
-                  )}
-                </dl>
-              )}
-
-              <div class="text-sm text-gray-700 mt-3 prose prose-sm prose-gray max-w-none">
-                <model.Content />
-              </div>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
+                data-open={model.id}
+                class="rounded border border-dashed border-gray-300 px-3 py-2 text-sm text-gray-600 hover:border-gray-400 hover:text-gray-800 cursor-pointer"
+              >{model.data.title}</button>
+            ))}
+          </div>
+        )}
+      </>
     )
     : (
       <div class="text-center py-10">
@@ -115,32 +125,197 @@ const models = await Promise.all(
     )
   }
 
-  <!-- Lightbox -->
+  <!--
+    One dialog holding every model's panel, all hidden until opened. Rendering
+    them up front keeps each model's markdown description as real markup rather
+    than something the script has to rebuild.
+  -->
   <dialog
-    id="origami-lightbox"
-    class="m-auto max-w-[92vw] max-h-[92vh] bg-transparent backdrop:bg-black/70 p-0"
+    id="origami-modal"
+    class="origami-modal m-auto w-[min(56rem,92vw)] max-h-[90vh] overflow-y-auto overscroll-contain rounded-lg bg-paper p-0 text-black shadow-2xl backdrop:bg-black/60"
   >
-    <!-- No src until a model is picked: an empty src="" makes some browsers re-request the page. -->
-    <img id="origami-lightbox-img" alt="" class="max-w-[92vw] max-h-[92vh] w-auto h-auto rounded" />
+    <div class="pointer-events-none sticky top-0 z-10 flex justify-end p-2">
+      <button
+        type="button"
+        data-close
+        aria-label="Close"
+        class="pointer-events-auto flex h-8 w-8 items-center justify-center rounded-full bg-paper/90 text-lg leading-none text-gray-500 hover:bg-orange-200 hover:text-black cursor-pointer"
+      >&times;</button>
+    </div>
+
+    {models.map(model => (
+      <!--
+        Photo and details sit side by side once there's room, so a tall portrait
+        doesn't leave half the dialog empty; they stack on narrow screens.
+      -->
+      <div
+        data-panel={model.id}
+        hidden
+        class="flex flex-col gap-6 px-5 pb-6 pt-0 md:flex-row md:items-center md:gap-8 md:px-8 md:pb-8"
+      >
+        {model.src && (
+          <div class="md:min-w-0 md:flex-1">
+            <img
+              src={model.src}
+              alt={model.data.title}
+              width={model.size?.width}
+              height={model.size?.height}
+              loading="lazy"
+              decoding="async"
+              class="mx-auto block max-h-[60vh] w-auto max-w-full rounded border border-gray-200"
+            />
+          </div>
+        )}
+
+        <div class="md:w-72 md:shrink-0">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h2 class="text-lg font-semibold">{model.data.title}</h2>
+          {model.formattedDate && (
+            <span class="text-xs text-gray-400">{model.formattedDate}</span>
+          )}
+        </div>
+
+        <!-- Credit where it's due: the designer, and what it was folded from. -->
+        {(model.data.designer || model.data.paper) && (
+          <dl class="mt-3 flex flex-col gap-1 text-sm">
+            {model.data.designer && (
+              <div class="flex gap-2">
+                <dt class="shrink-0 text-gray-400">designed by</dt>
+                <dd class="text-gray-700">
+                  {model.data.designerUrl
+                    ? <Link href={model.data.designerUrl} external>{model.data.designer}</Link>
+                    : model.data.designer
+                  }
+                </dd>
+              </div>
+            )}
+            {model.data.paper && (
+              <div class="flex gap-2">
+                <dt class="shrink-0 text-gray-400">folded from</dt>
+                <dd class="text-gray-700">{model.data.paper}</dd>
+              </div>
+            )}
+          </dl>
+        )}
+
+        <div class="prose prose-sm prose-gray mt-4 max-w-none text-sm text-gray-700">
+          <model.Content />
+        </div>
+        </div>
+      </div>
+    ))}
   </dialog>
-
-  <script>
-    // astro:page-load fires on first load and after every client-side navigation
-    document.addEventListener('astro:page-load', () => {
-      const dialog = document.getElementById('origami-lightbox') as HTMLDialogElement | null;
-      const img = document.getElementById('origami-lightbox-img') as HTMLImageElement | null;
-      if (!dialog || !img) return;
-
-      document.querySelectorAll<HTMLButtonElement>('[data-lightbox-src]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          img.src = btn.dataset.lightboxSrc ?? '';
-          img.alt = btn.dataset.lightboxAlt ?? '';
-          dialog.showModal();
-        });
-      });
-
-      // Click anywhere (image included) to dismiss; Escape works for free.
-      dialog.addEventListener('click', () => dialog.close());
-    });
-  </script>
 </Layout>
+
+<style>
+  /* Pops in from slightly small and low; the backdrop fades with it. The close
+     animations need their own keyframe names rather than the opening ones run in
+     reverse: keeping the same animation-name doesn't restart the animation, so
+     it would finish instantly and never fire animationend. */
+  @keyframes origami-modal-in {
+    from { opacity: 0; transform: scale(0.94) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes origami-modal-out {
+    from { opacity: 1; transform: scale(1) translateY(0); }
+    to   { opacity: 0; transform: scale(0.96) translateY(8px); }
+  }
+  @keyframes origami-backdrop-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes origami-backdrop-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+
+  .origami-modal[open] {
+    animation: origami-modal-in 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .origami-modal[open]::backdrop {
+    animation: origami-backdrop-in 220ms ease-out;
+  }
+  .origami-modal[open].closing {
+    animation: origami-modal-out 150ms ease-in forwards;
+  }
+  .origami-modal[open].closing::backdrop {
+    animation: origami-backdrop-out 150ms ease-in forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .origami-modal[open],
+    .origami-modal[open]::backdrop,
+    .origami-modal[open].closing,
+    .origami-modal[open].closing::backdrop {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // astro:page-load fires on first load and after every client-side navigation
+  document.addEventListener('astro:page-load', () => {
+    const modal = document.getElementById('origami-modal') as HTMLDialogElement | null;
+    if (!modal) return;
+
+    const panels = Array.from(modal.querySelectorAll<HTMLElement>('[data-panel]'));
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function open(id: string) {
+      let label = '';
+      panels.forEach(panel => {
+        const active = panel.dataset.panel === id;
+        panel.hidden = !active;
+        if (active) label = panel.querySelector('h2')?.textContent ?? '';
+      });
+      modal!.setAttribute('aria-label', label);
+      modal!.showModal();
+      modal!.scrollTop = 0;
+    }
+
+    // Let the close animation finish before the dialog actually goes away. The
+    // timer is a backstop: if the animation never runs (or animationend is
+    // missed) the dialog still closes rather than sticking open.
+    const CLOSE_MS = 150;
+    function close() {
+      if (reduceMotion) return modal!.close();
+      if (modal!.classList.contains('closing')) return;
+
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        modal!.classList.remove('closing');
+        modal!.close();
+      };
+
+      modal!.classList.add('closing');
+      modal!.addEventListener('animationend', finish, { once: true });
+      setTimeout(finish, CLOSE_MS + 100);
+    }
+
+    document.querySelectorAll<HTMLElement>('[data-open]').forEach(btn => {
+      btn.addEventListener('click', () => open(btn.dataset.open!));
+    });
+
+    modal.querySelector('[data-close]')?.addEventListener('click', close);
+
+    // Close on backdrop clicks only. Testing the pointer against the dialog's
+    // own box beats checking event.target: the sticky close-button bar is
+    // pointer-events:none, so clicks on its padding would otherwise land on the
+    // dialog element and read as a backdrop click from inside the card.
+    modal.addEventListener('click', event => {
+      const box = modal!.getBoundingClientRect();
+      const inside =
+        event.clientX >= box.left && event.clientX <= box.right &&
+        event.clientY >= box.top && event.clientY <= box.bottom;
+      if (!inside) close();
+    });
+
+    // Escape fires `cancel`; intercept it so the close animation still plays.
+    modal.addEventListener('cancel', event => {
+      event.preventDefault();
+      close();
+    });
+  });
+</script>

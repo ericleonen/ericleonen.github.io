@@ -36,6 +36,6 @@ workingOn:
   - text: "Building [Kamibase](https://kamibase-web.vercel.app/), a site for finding and sharing origami crease patterns"
 ---
 
-I'm a Data Science and Statistics major at the University of Washington. I'm curious about
-- answering important questions about our macroeconomy with causal inference
-- exploring how formalized LLM reasoning can advance economic and mathematical theory.
+I'm a Data Science and Statistics senior at the University of Washington. I'm curious about
+- how macroeconomic policy can create a fairer, more stable economic system
+- the statistical nuances of causal inference and econometric estimators.

@@ -31,11 +31,11 @@ outsideOfAcademics:
       emoji: "⚡"
       url: "https://rivalsmeta.com/player/1371311011"
 workingOn:
-  - text: "Applying, applying, applying to economics predocs with the help of [FindMyPredoc.com](https://findmypredoc.ericleonen.com)"
-  - text: "Folding complex origami models by making my own double-tissue paper!"
-  - text: "Building [Kamibase](https://kamibase-web.vercel.app/), a site for finding and sharing origami crease patterns"
+  - text: "Learning (more) causal inference by enjoying Scott Cunningham's online book [Causal Inference: The Remix](https://mixtape.scunning.com/)"
+  - text: "Folding origami: currently Kade Chan's [Gryphon](https://kadechan.blogspot.com/2013/03/gryphon.html) and Satoshi Kamiya's [Ancient Dragon](https://www.youtube.com/watch?v=5sC3FheN5_E&vl=en-US)"
+  - text: "Taking [Analysis I](https://sites.math.washington.edu/~m424/), [Topology](https://math.washington.edu/courses/2024/autumn/math/441/a), [Data Visualization](https://stat.uw.edu/academics/course-catalog/stat-451), and [Algorithm Ethics](https://stat.uw.edu/academics/course-catalog/stat-303) at the University of Washington"
 ---
 
-I'm a Data Science and Statistics senior at the University of Washington. I'm curious about
+I'm a Data Science and Statistics senior at the University of Washington and an incoming Research Associate on the Federal Reserve Bank of Boston's Macro Monetary Group. I'm curious about
 - how macroeconomic policy can create a fairer, more stable economic system
 - the statistical nuances of causal inference and econometric estimators.

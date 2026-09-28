@@ -32,7 +32,7 @@ outsideOfAcademics:
       url: "https://rivalsmeta.com/player/1371311011"
 workingOn:
   - text: "Learning (more) causal inference by enjoying Scott Cunningham's online book [Causal Inference: The Remix](https://mixtape.scunning.com/)"
-  - text: "Folding origami: currently Kade Chan's [Gryphon](https://kadechan.blogspot.com/2013/03/gryphon.html) and Satoshi Kamiya's [Ancient Dragon](https://www.youtube.com/watch?v=5sC3FheN5_E&vl=en-US)"
+  - text: "Folding origami: currently Satoshi Kamiya's [Ancient Dragon](https://www.youtube.com/watch?v=5sC3FheN5_E&vl=en-US)"
   - text: "Taking [Analysis I](https://sites.math.washington.edu/~m424/), [Topology](https://math.washington.edu/courses/2024/autumn/math/441/a), [Data Visualization](https://stat.uw.edu/academics/course-catalog/stat-451), and [Algorithm Ethics](https://stat.uw.edu/academics/course-catalog/stat-303) at the University of Washington"
 ---
 
